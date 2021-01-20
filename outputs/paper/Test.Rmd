@@ -29,7 +29,7 @@ library(gt)
 #If not running R scripts/have access to complete GitHub repo
 paramedic2020_cleaned <- read_csv(here("inputs","data","2020_paramedic-incidents_cleaned.csv"))
 paramedic2019_cleaned <- read_csv(here("inputs","data","2019_paramedic-incidents_cleaned.csv"))
-paramedic20192020_cleaned <- read_csv(here("inputs","data","2019--2020_paramedic-incidents_cleaned.csv"))
+paramedic20192020_cleaned <- read_csv(here("inputs","data","2019-2020_paramedic-incidents_cleaned.csv"))
 ```
 
 
