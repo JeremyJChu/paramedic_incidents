@@ -3,6 +3,10 @@ title: "Paper 1 Test"
 author: "Jeremy Chu"
 date: "17/01/2021"
 output: pdf_document
+abstract: "This is my abstract"
+bibliography: references.bib
+fontsize: 11pt
+mainfont: Calibri
 ---
 
 ```{r setup, include=FALSE}
@@ -16,24 +20,91 @@ knitr::opts_chunk$set(echo = FALSE,
 
 ```{r library}
 library(tidyverse)
-library(opendatatoronto)
 library(here)
+library(knitr)
+library(gt)
 ```
 
-```{r read-data}
-#Getting resource from Open Data Toronto, filtering for .xls file only. 
-paramedic_data <- list_package_resources("https://open.toronto.ca/dataset/paramedic-services-incident-data/") %>% 
-  filter(name == "paramedic-services-incident-data-2010-2020") %>%
-  get_resource()
-
-#Saving only the 2020 sheet for data analysis
-paramedic2020 <- paramedic_data[["2020"]]
-
-#Write dataframe to csv, uncomment if necessary
-#write_csv(paramedic2020, here("inputs", "data", "2020_paramedic-incidents_raw.csv"))
+```{r read-data, include=FALSE}
+#If not running R scripts/have access to complete GitHub repo
+paramedic2020_cleaned <- read_csv(here("inputs","data","2020_paramedic-incidents_cleaned.csv"))
+paramedic2019_cleaned <- read_csv(here("inputs","data","2019_paramedic-incidents_cleaned.csv"))
 ```
+
+
+# Introduction
+
+Insert introduction here (Probably purpose)
+
+# Data
+
+## Source
+Submitted to Open Data Toronto by Toronto Paramedic Services, the "paramedic-services-incident-data-2010-2020" dataset contains data on when and where paramedics are dispatched for incidents called in through 911, the number of units that were dispaatched, the type of incident (medical, fire etc.) and how high of a priorirty each incident is. 
+
+## Understanding and Acknowledging Bias
+The point of contention of course, is what determines priority. The dataset contains a field called "Priority_Number" with the values [1, 3, 4, 5, 9, 11, 12, 13]. Referencing the accompanying metadata documentation "paramedic-services-incident-data-description," these priority numbers translate to [Delta, Charlie, Bravo, Alpha, Echo, Alpha1, Alpha2, Alpha3] respectively. These "priority codes" are a product of the Medical Priority Dispatch System (MPDS) and its associated ProQA software from the Priority Dispatch Corporation [@citeTorontoMPDS]. 
+
+Basically what occurs is that when a caller dials 9.1.1 to report an emergency, in order to determine the approriate level of response required, the telecommunicator at the Toronto Paramedic Services' Dispatch Centre poses a series of scripted questions, and triages the answers into pre-established MPDS codes. These codes are then translated into Toronto Paramedic Services' own priority numbers, and are given varying associated response measures (Table 1) [@citeTPSData]. 
+
+```{r creation-priority-reference-table}
+reference_table <- paramedic2019_cleaned %>%
+  select(Priority_Number, Priority_Code, Priority_Definition) %>%
+  unique() 
+
+MDPS_table <- reference_table[c(5, 3, 4, 1, 2, 6, 7, 8),] #Reordering table based on most severe codes
+```
+
+```{r display-priority-reference-table}
+MDPS_table %>%
+  gt() %>%
+  tab_header(
+    title = md("**Medical Dispatch Priority System Reference Table**"),
+    subtitle = md("&nbsp;")
+# https://stackoverflow.com/questions/61632308/r-gt-package-error-in-latex-theres-no-line-here-to-end
+# Adding a no space subtitle md("&nbsp;") allows the gt tab_header() function to work, otherwise you get a "No Line to End" error
+  ) %>%
+  cols_label( #Relabeling the columns, md("****") makes the column headers bold
+    Priority_Number = md("**Priority Number**"),
+    Priority_Code = md("**Code**"),
+    Priority_Definition = md("**Definition**")
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = vars(Priority_Number) #aligns only Priority_Number to center
+  ) %>%
+  tab_source_note(md("Table 1: See Power 2020 for more information"))
+```
+Despite the efficiency and effectiveness of this system in standardizing responses to 9.1.1 emergency calls, allowing for quick allocation of limited resources, there are some caveats that must be kept in mind when analyzing paramedic incident data from a statistical and data science perspective. 
+
+1. Accuracy of MDPS
+  + According to @citeAccuracyMDPS, the current state of MDPS lacks both a consensus on "common standards for reporting" and subsequently any measure of accuracy for the MDPS reporting system. In other words, @citeAccuracyMDPS have found evidence of over-triage and under-traige of incidents. That is, excessive or insufficient responses for the incident at hand. Of course, this is not a critique of the medical system. The MDPS leans toward over-triage and with good reason, it is afterall better safe than sorry. However, evidence of under-traige is problematic, and even more troublesome is the complete lack of accuracy evaluation. This makes it hard to look at the data figure out which cases were over, under, and accurate triages. 
+  
+2. Codification of Emergencies
+  + Despite its good intentions, it is important to note that the data presented in the paramedic incidents dataset is first only a subsection of the priority codes, as there are a plethora of subcodes that give further detail to the type of incident (ie. 12-D-2 implies continuous or multiple seizures) [@citeClawson].The priority codes are nothing but the highest level of categorization, and will conflate different types of incidents (various medical, fire, traffic) into the same number code. Ultimately, this limits the extent of insights that can be gleaned from a standalone dataset. 
+
+## 
+With the flaws of the dataset in mind, let's explore the data. 
+```{r}
+ggplot(data = paramedic2020_cleaned,
+       mapping = aes(x = Priority_Code)) +
+  geom_bar() +
+  theme_minimal() +
+  labs(x = "Priority Number",
+       y = "Count",
+       title = "How were 911 calls classified in 2020?",
+       caption ="Source: Open Data Toronto")
+```
+Figure 1: 2020 911 Calls Distribution
+
+
+
+
 
 ```{r}
-
+ggplot(data = paramedic2020_cleaned,
+       mapping = aes(x = Priority_Code, y = Units_Arrived_At_Scene)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  theme_minimal()
 ```
+
 
