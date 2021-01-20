@@ -29,6 +29,7 @@ library(gt)
 #If not running R scripts/have access to complete GitHub repo
 paramedic2020_cleaned <- read_csv(here("inputs","data","2020_paramedic-incidents_cleaned.csv"))
 paramedic2019_cleaned <- read_csv(here("inputs","data","2019_paramedic-incidents_cleaned.csv"))
+paramedic20192020_cleaned <- read_csv(here("inputs","data","2019--2020_paramedic-incidents_cleaned.csv"))
 ```
 
 
@@ -82,7 +83,7 @@ Despite the efficiency and effectiveness of this system in standardizing respons
 2. Codification of Emergencies
   + Despite its good intentions, it is important to note that the data presented in the paramedic incidents dataset is first only a subsection of the priority codes, as there are a plethora of subcodes that give further detail to the type of incident (ie. 12-D-2 implies continuous or multiple seizures) [@citeClawson].The priority codes are nothing but the highest level of categorization, and will conflate different types of incidents (various medical, fire, traffic) into the same number code. Ultimately, this limits the extent of insights that can be gleaned from a standalone dataset. 
 
-## 
+## Insert Title Here ##
 With the flaws of the dataset in mind, let's explore the data. 
 ```{r}
 ggplot(data = paramedic2020_cleaned,
