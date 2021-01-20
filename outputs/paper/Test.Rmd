@@ -12,17 +12,22 @@ mainfont: Calibri
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
                       fig.align = "center",
-                      fig.width = 4,
-                      fig.height = 4,
-                      dev = "png",
+#                    fig.width = 4,
+#                     fig.height = 4,
+#                      dev = "png",
                       cache = TRUE)
 ```
 
 ```{r library}
+#install.packages("ggpubr")
 library(tidyverse)
 library(here)
 library(knitr)
 library(gt)
+library(magick)
+library(ggpubr)
+library(cowplot)
+library(gridExtra)
 ```
 
 ```{r read-data, include=FALSE}
@@ -85,27 +90,64 @@ Despite the efficiency and effectiveness of this system in standardizing respons
 
 ## Insert Title Here ##
 With the flaws of the dataset in mind, let's explore the data. 
-```{r}
-ggplot(data = paramedic2020_cleaned,
-       mapping = aes(x = Priority_Code)) +
-  geom_bar() +
-  theme_minimal() +
+```{r Figure-1a-Medical}
+paramedic20192020_cleaned$Year <- as.character(paramedic20192020_cleaned$Year) #Turning Year from numeric to character so fill works
+
+medical_bar <- 
+paramedic20192020_cleaned %>%
+  filter(Incident_Type == "Medical") %>%
+  ggplot(mapping = aes(x = Priority_Code, fill = Year)) +
+  geom_bar(position = position_dodge()) +
+  geom_text(stat = "count", aes(label = ..count..), vjust=1.6, color="black",
+            position = position_dodge(0.9), size=2.0) +
+  scale_fill_brewer(palette="Blues") +
+  theme(panel.grid = element_blank(),
+        axis.text.y = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        panel.background = element_blank()
+        ) +
   labs(x = "Priority Number",
        y = "Count",
-       title = "How were 911 calls classified in 2020?",
+       title = "How were Medical Incidents Classified in 2019 and 2020?",
        caption ="Source: Open Data Toronto")
 ```
-Figure 1: 2020 911 Calls Distribution
 
-
-
-
-
-```{r}
-ggplot(data = paramedic2020_cleaned,
-       mapping = aes(x = Priority_Code, y = Units_Arrived_At_Scene)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  theme_minimal()
+```{r Figure-1b-Vehicle}
+vehicle_bar <-
+paramedic20192020_cleaned %>%
+  filter(Incident_Type == "Motor Vehicle Accident") %>%
+  ggplot(mapping = aes(x = Priority_Code, fill = Year)) +
+  geom_bar(position = position_dodge()) +
+  geom_text(stat = "count", aes(label = ..count..), vjust=1.6, color="black",
+            position = position_dodge(0.9), size=2.0) +
+  scale_fill_brewer(palette="Blues") +
+  theme(panel.grid = element_blank(),
+        axis.text.y = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        panel.background = element_blank()
+        ) +
+  labs(x = "Priority Number",
+       y = "Count",
+       title = "How were Motor Vehicle Incidents classified in 2019 and 2020?",
+       caption ="Source: Open Data Toronto")
 ```
 
 
+```{r Figure-1-complete, include=FALSE}
+medical_vehicle_panel <-
+grid.arrange(
+  medical_bar +
+  theme(plot.margin = unit(c(0.2, 0.2, 0.2, 0.2), units = , "cm")),
+  
+  vehicle_bar +
+  theme(plot.margin = unit(c(0.2, 0.2, 0.2, 0.2), units = , "cm"))
+)
+
+ggsave(medical_vehicle_panel, file = "medical-vehicle_panel.png", width = 8, height = 7)
+```
+![This is an image](images/medical-vehicle_panel.png)
+The key questions I wanted to answer with the data were **Is there an increase in medical emergencies due to COVID-19?** and **Did trafic accidents decrease due to COVID-19?**
+
+## References ##
