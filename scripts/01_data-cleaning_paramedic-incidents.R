@@ -67,12 +67,12 @@ paramedic20192020_cleaned <- rbind(paramedic2019_cleaned, paramedic2020_cleaned)
 ### Additional Cleaning ###
 paramedic20192020_cleaned <- paramedic20192020_cleaned %>%
   mutate(Year = as.POSIXct(Dispatch_Time, format = "%m/%d/%Y %H:%M:%S")) %>% #Change datetime to POSIXct 
-  mutate(Month = as.POSIXct(Dispatch_Time, format = "%m/%d/%Y %H:%M:%S"))
+  mutate(Month = as.POSIXct(Dispatch_Time, format = "%m/%d/%Y %H:%M:%S")) #Change datetime to POSIXct 
 
-paramedic20192020_cleaned$Year <- format(paramedic20192020_cleaned$Year, format = "%Y") #Extract only Year
-paramedic20192020_cleaned$Month <- format(paramedic20192020_cleaned$Month, format = "%m") 
+paramedic20192020_cleaned$Year <- format(paramedic20192020_cleaned$Year, format = "%Y") #Extract only year
+paramedic20192020_cleaned$Month <- format(paramedic20192020_cleaned$Month, format = "%m") #Extract only month
 
-paramedic20192020_cleaned <- paramedic20192020_cleaned %>%
+paramedic20192020_cleaned <- paramedic20192020_cleaned %>% #Decided to transform string numbers into month abbreviations for better visualization purposes
   mutate(Month = case_when(
     Month == "01" ~ "Jan",
     Month == "02" ~ "Feb",
@@ -88,7 +88,6 @@ paramedic20192020_cleaned <- paramedic20192020_cleaned %>%
     Month == "12" ~ "Dec")
   )
   
-class(paramedic20192020_cleaned$Month)
 
 ### Save Data ###
 write_csv(paramedic2020_cleaned, here("inputs", "data", "2020_paramedic-incidents_cleaned.csv"))
