@@ -1,0 +1,514 @@
+---
+title: "Paramedic Life Threatening Medical Emergencies Mirror COVID-19 Epidemic Curve in 2020: Exposing the Toronto Neighbourhood Gap"
+author: "Jeremy Chu"
+date: "25/01/2021"
+classoption: table
+output: bookdown::pdf_document2
+header-includes: 
+  \usepackage{float}
+  \usepackage{colortbl} 
+  \arrayrulecolor{white}
+abstract: "Through exploratory data analysis (EDA) on the Paramedic Medical Incidents 2010-2020 dataset, and the COVID-19 Case Numbers dataset from Open Data Toronto, this study shows that while 2020 had less overall medical emergencies than 2019, it had more occurances of life threatening respiratory/cardiac (Echo-level) incidents. Plotting a line graph comparing the Echo incident trend with the COVID-19 epidemic curve reveals a similar trajectory: A peak in April, followed by a steady Summer before escalating again in the Winter starting in October. In addition, through creatin heatmaps of paramedic Echo-incidents in 2020 and 2019, along with COVID-19 cases in 2020, the study shows that there are interesting overlaps among Toronto neighbourhoods, with North-Western Etobicoke (Jane and Finch) for example that exhibits high risk in both COVID-19 and Echo-incidents. Ultimately the results hope to inform future research into examining the relationship between Echo-incidents and COVID-19, and look at why certain neighbourhoods are all around higher risk at both crises while others might only be at risk in one" 
+bibliography: references.bib
+fontsize: 11pt
+mainfont: Calibri
+---
+```{r note-document-setup, include=FALSE}
+# Use \usepackage{colortbl} along with \arrayrulecolor{white} to set the default borders for tables in the document to white
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      fig.align = "center",
+                      cache = TRUE) 
+```
+
+```{r library, include=FALSE}
+#install.packages("gt")
+#install.packages("gghighlight")
+#install.packages("kableExtra")
+#install.packages("grid)
+library(tidyverse)
+library(here)
+library(knitr)
+library(gt)
+library(magick)
+library(ggpubr)
+library(gridExtra)
+library(gghighlight)
+library(kableExtra)
+library(bookdown)
+library(grid)
+library(rgdal)
+library(maptools)
+```
+
+```{r load_scripts, include=FALSE}
+### Uncomment and run if not reading in data ###
+
+#source(here("scripts","00_get-data-paramedic-incidents.R")) # Can be substituted with local files, see chunk read-data
+#source(here("scripts","01_data-cleaning_paramedic-incidents.R")) # Can be substituted with local files, see chunk read-data
+#source(here("scripts","02_get-data-covid.R")) # Can be substituted with local files, see chunk read-data
+#source(here("scripts","03_data-cleaning_covid.R")) # Can be substituted with local files, see chunk read-data
+#source(here("scripts","04_get-shapefile.R")) # Can be substituted with chunk read-shapefile
+
+### Script Cleanup ###
+#rm(paramedic_data, covid_df, covid_data, paramedic2010, paramedic2011, paramedic2012, paramedic2013, paramedic2014, paramedic2015, paramedic2016, paramedic2017, paramedic2017, paramedic2018, paramedic2019, paramedic2020, temp, temp2, Toronto_SHP_file) # Removes useless files
+```
+
+```{r read-data, include=FALSE}
+### Comment and Skip if running scripts ###
+
+#If not running R scripts/have access to complete GitHub repo
+paramedic20192020_cleaned <- read_csv(here("inputs","data","2019-2020_paramedic-incidents_cleaned.csv"))
+paramedic11years_cleaned <- read_csv(here("inputs","data","2010-2020_paramedic-incidents_cleaned.csv"))
+covid_monthCount <- read_csv(here("inputs","data","2020_covid-cases_cleaned.csv"))
+covid_hospitalized <- read_csv(here("inputs", "data", "2020_covid-cases-hospitalization_cleaned.csv"))
+```
+
+```{r data-cleaning, include=FALSE}
+### Comment and Skip if running scripts ###
+
+# If reading data, need to do some factoring in the Markdown
+paramedic20192020_cleaned$Month <- factor(paramedic20192020_cleaned$Month, levels = month.abb) #Turning Months into factors for easier sorting
+paramedic11years_cleaned$Month <- factor(paramedic11years_cleaned$Month, levels = month.abb) #Turning Month to factor for easier sorting
+paramedic11years_cleaned$Year <- as.character(paramedic11years_cleaned$Year) #Turning Year to character for graph manipulation
+```
+
+```{r read-shapefile, include=FALSE}
+### Comment and Skip if running scripts ###
+
+# Download and Unzip Shapefile from Statistics Canada 
+temp <- tempfile()
+temp2 <- tempfile()
+download.file("https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/2016/lfsa000b16a_e.zip", temp)
+unzip(zipfile = temp, exdir = temp2)
+Toronto_SHP_file<-list.files(temp2, pattern = ".shp$",full.names=TRUE)
+
+# Read Shapefile 
+fsas <-  readOGR(dsn = Toronto_SHP_file, layer = "lfsa000b16a_e")
+```
+
+# Introduction
+
+The deadliness of COVID-19 has been swamped with misinformation and confusion. To make sense of how the pandemic has been impacting the Metropolitan Toronto Area specifically, this project asks whether there had been an increase in life-threatening respiratory or cardiac emergencies within the region during 2020. Drawing upon the Paramedic Services Incident Data 2010-2020 and the COVID-19 Cases in Toronto datasets from Toronto’s Open Data Catalogue, this project firstly draws comparisons between medical emergencies in 2020 and the past 11 years, then proceeds to compare the trend of 2020 medical emergencies with COVID-19 case trends. Lastly, 2 heatmaps were created to investigate whether the regions with high medical emergencies coincided with at-risk COVID-19 areas, creating potential for future research. 
+
+The results were telling. While it was surprising that 2020 actually reported less overall medical emergencies (of all severity) than 2019, once the data was filtered down to the Echo-level (life-threatening respiratory or cardiac) emergencies in 2020, and then compared to the COVID-19 trend line, it is apparent that both trends mimic each other: **Rise to a peak in April, stabilize during the Summer, and then gradually increase reaching a peak in October and remaining high in the Winter.** A cross-reference with news articles and data from the Ontario Ministry of Health adds further support. When both paramedic and COVID data was geomapped onto Statistics Canada’s 2016 Census Boundary Forward Sortation Area file, the results showed significant overlap in neighbourhoods both having issues with higher numbers of Echo-level incidents and COVID-19 cases.
+
+The issue regarding these results is that they require diving into a degree granularity before the serious impacts of COVID-19 can be gleaned. For most people, as the heatmap will show, will see the data being influenced by the large portions of “low-risk” neighbourhoods. Indeed, for most neighbourhoods, the lockdown has indeed led to 2020 having less overall medical emergencies compared to 2019. However, for select neighbourhoods, the data shows a completely different story, and opens up opportunities for policy makers to dive in. 
+
+^[GitHub repository for study: https://github.com/JeremyJChu/paramedic_incidents]
+
+# Methods 
+
+All of the analysis was done using R [@citeR]. Datasets were downloaded using the Toronto Open Data Package [@citeODT], reproducible file paths utilized the here pacakge [@citeHere], and data cleaning/transformation was done with tidyverse [@citeTidy]. The shapefile was read and manipulated using rgdal and maptools [@citeRgdal;@citeMaptools]. All graphs were plot and arranged using a combination of ggplot2, gridExtra, and gghighlight [@citeGgplot2; @citeGridExtra; @citeGghighlight]. Tables were created using knitr::kable [@citeKnitr] and kableExtra [@citeKableExtra]. The creation of the final product was aided with ggpubr, knitr, bookdown and magick [@citeGgpubr; @citeKnitr; @citeBookdown; @citeMagick].
+
+# Data
+
+## Source
+
+### Paramedic Services Incident Data 2010-2020 (Open Data Toronto)  
+
+Published by Toronto Paramedic Services, the dataset contains information on the emergency dispatch responses from Toronto Paramedic Services between the years 2010-2020. Incident data is obtained whenever a valid 9-1-1 emergency call is dialed in and logs up to the point in which Paramedic Services have been dispatched. There is no information on the outcome of the emergency. Data is refreshed annually [@citeParamedicData]. 
+
+### COVID-19 Cases in Toronto (Open Data Toronto) 
+
+Published by Toronto Public Health, the dataset is the most up-to-date source of COVID-19 cases within Toronto. Case data is obtained whenever a COVID-19 case is reported directly from laboratories to public health department, and after thorough investigation by Toronto Public Health, the data is summarized to show trends. It must be stressed that all data is preliminary. Data is updated weekly [@citeCovidData].
+
+### 2016 Census – Boundary Files (Statistics Canada)  
+
+Published by Statistics Canada for public usage, this project will utilize the Forward Sortation Area shapefile in English from Statistics Canada’s 2016 Census – Boundary Files [@citeStatsCan]. The shapefile contains Canada-wide boundary information based on forward sortation area codes - the first 3 characters of the Canadian postal code. For more information on FSAs, please see @citeFSA. 
+
+## Metadata
+
+### Paramedic Services Incident Data 2010-2020 
+
+The dataset contains 6 fields, for the project the following 4 will be examined:  
+
+**Dispatch_Time**: When paramedic services were dispatched. Format ISO 8601.  
+
+**Incident_Type**: Type of incident. Medical, Motor Vehicle Accident, Emergency Transfer, Fire, or Airport Standby.  
+
+**Priority_Number**: Priority of incident: 1, 3, 4, 5, 9, 11, 13, 12. See section: [Understanding and Acknowledging Bias] below for more information.  
+
+**Forward_Sortation_Area**: General location of incident according to the FSA code.  
+
+For more detailed metadata, please consult @citeTorontoMPDS.
+
+### COVID-19 Cases in Toronto  
+
+The dataset contains 18 fields, for the project the following 3 will be examined:  
+
+**FSA**: Forward sortation area of where the COVID-19 case was reported.  
+
+**Reported Date**: The date when public health units become aware of the case. Chosen over `Episode Date` because some are estimates and the purpose of the project is to look at cases serious enough to warrant hospitalization.  
+
+**Ever Hospitalized**: Boolean field, data is filtered for Yes to only show cases that were hospitalized. 
+
+## Understanding and Acknowledging Bias
+### Paramedic Services Incident Data 2010-2020  
+
+The point of contention of course, is what determines priority. The priority number is determined by Toronto Paramedic Services based on the Medical Priority Dispatch System (MPDS). The MPDS is a system in which once a caller dials 9-1-1 to report an emergency, the telecommunicator at the Dispatch Centre poses a series of scripted questions and triages the answers into pre-established MPDS codes (See Table \@ref(tab:mdps-tb). Created using knitr::kable and kableExtra [@citeKnitr; @citeKableExtra]). Those codes and then turned into the priority numbers in the dataset [@citeTPSData; @citeTorontoMPDS].
+
+```{r creation-priority-reference-table}
+reference_table <- paramedic20192020_cleaned %>%
+  select(Priority_Number, Priority_Code, Priority_Definition) %>% # Select fields relating to Priority_Number
+  unique() # Counting unique elements
+
+MDPS_table <- reference_table[c(5, 3, 4, 1, 2, 6, 7, 8),] # Reordering table based on most severe codes
+```
+
+```{r mdps-tb, echo=FALSE}
+knitr::kable(MDPS_table, 
+             col.names = gsub("_", " ", names(MDPS_table)), # Substitute "_" in names with space
+             align = "cll", # Align columns into Center-Left-Left
+             caption = "Medical Dispatch Priority System Reference Table") %>% # Add a caption to table so it's cross-referencable
+             row_spec(0,bold=TRUE) %>%
+             kableExtra::kable_styling(latex_options = "hold_position") # Code from https://stackoverflow.com/questions/44850011/how-to-stop-bookdown-tables-from-floating-to-bottom-of-the-page-in-pdf. This holds the table in place so it doesn't float and mess up the text
+```
+Despite the efficiency and effectiveness of this system in standardizing responses to 9-1-1 calls, allowing for quick allocation of limited resources, there are some caveats that must be kept in mind when analyzing paramedic incident data from a statistical and ethical perspective.  
+
+
+**Accuracy of MDPS**  
+
+According to @citeAccuracyMDPS, the current state of MDPS lacks both a consensus on "common standards for reporting" and subsequently any measure of accuracy for the MDPS reporting system. In other words, @citeAccuracyMDPS have found evidence of over-triage and under-traige of incidents. That is, excessive or insufficient responses for the incident at hand. Of course, this is not a critique of the medical system. The MDPS leans toward over-triage and with good reason, it is afterall better safe than sorry. However, evidence of under-traige is problematic, and even more troublesome is the complete lack of accuracy evaluation. This makes it hard to look at the data figure out which cases were over, under, and accurate triages.  
+
+**Codification of Emergencies**  
+
+Despite its good intentions, it is important to note that the data presented in the paramedic incidents dataset is first only a subsection of the priority codes, as there are a plethora of subcodes that give further detail to the type of incident (ie. 12-D-2 implies continuous or multiple seizures) [@citeClawson]. The priority codes are nothing but the highest level of categorization, and will conflate different types of incidents (various medical, fire, traffic) into the same number code. Ultimately, this limits the extent of insights that can be gleaned from a standalone dataset. 
+
+### COVID-19 Dataset  
+
+Statistically, bear in mind that the Reported Date field is subject to human error. Delayed reporting is a risk. Even for patients who get hospitalized over COVID, their report date could be days prior to hospitalization. Understand that there will be malleability in time. 
+
+# Analysis
+
+## 2020 Had Less Medical Overall Emergencies Than 2019, but More Life Threatening Emergencies
+
+Keeping in mind the potential pitfalls of the datasets, let’s explore the data. Using tidyverse [@citeTidy], I first filtered the dataset to show only medical emergencies, and subsequently created a bar chart comparing 2019 to 2020 using ggplot2 [@citeGgplot2] (See Figure \@ref(fig:medical-bar)). Between 2020 and 2019, surprisingly 2019 actually had more total emergency calls and dispatches than 2020. 
+```{r figure-1-medical-bar, input=FALSE}
+## Figure 1a Medical Bar ##
+
+paramedic20192020_cleaned$Year <- as.character(paramedic20192020_cleaned$Year) # Turning Year from numeric to character so fill works
+
+medical_bar <- #Plotting Bar Chart 
+  paramedic20192020_cleaned %>%
+  filter(Incident_Type == "Medical") %>%
+  ggplot(mapping = aes(x = Priority_Code, fill = Year)) + # Fill bar colors based on Year
+  geom_bar(position = position_dodge()) + # Makes the bars appear side by side instead of stacking
+  geom_text(stat = "count", aes(label = ..count..), vjust=1.6, color="black", #Stat "count" allows for labelling of bar chart with no y axis
+            position = position_dodge(0.9), size=2.0) +
+  scale_fill_brewer(palette="Blues") +
+  theme(panel.grid = element_blank(), #No grid
+        axis.text.y = element_blank(), #No y axis text
+        axis.title = element_blank(), #No axis title for both axes
+        axis.ticks = element_blank(), #No ticks, the little black lines, in both axes
+        legend.title = element_blank(), #No legend title
+        panel.background = element_blank(), #No grey background
+        plot.title = element_text(size = 10, face = "bold", hjust = 0.5), #Title size and face adjustment
+        plot.caption = element_text(size = 6)) + #Caption size adjustment 
+  labs(x = "Priority Number", #Adding labels and misc text
+       y = "Count",
+       title = "How were Medical Incidents Classified in 2019 and 2020?",
+       caption ="Source: Open Data Toronto")
+```
+
+```{r medical-bar, echo=FALSE, fig.cap = "Medical Bar", fig.pos = "H", out.width = '70%'}
+show(medical_bar)
+# knitr::include_graphics(here("outputs/paper/images/04_2019-2020-medical_bar.png")) Option for local files
+# fig.pos = "H" along with the header-includes: \usepackage{float} in started lets you lock images in place so they don't float
+#out.width changes the size of the image. From: https://stackoverflow.com/questions/29696172/how-to-hold-figure-position-with-figure-caption-in-pdf-output-of-knitr. 
+```
+Only Charlie and Echo-levels reported more incidents in 2020. At first glance, the difference seems minuscule. However, I was less concerned about the number, but rather when the incidents occurred. It is also important to find out whether 2020 showed a different trend compared to previous years. Filtering only Echo-level incidents with tidyverse because of its cardiac and respiratory category and therefore attribution to COVID-19 [@citeTidy], I compared the Echo incident trends between 2019 and 2020 and plotted a line graph with ggplot2 [@citeGgplot2] (See Figure \@ref(fig:echo-line)). 
+
+```{r echo-table}
+## Line Graph Comparing Echo Incidents Between 2019 and 2020 ##
+
+# Creating Echo Table
+echo_count <-
+  paramedic20192020_cleaned %>%
+  filter(Incident_Type == "Medical" & Priority_Code == "Echo") %>% # Simple filter for Medical Incidents that are Priority Echo
+  group_by(Year, Month) %>% 
+  count()
+```
+
+```{r prep-echo-line, echo=FALSE}
+#Creating Line Graph
+echo_line_graph <- 
+  echo_count %>%
+  ggplot(aes(x = Month, y = n, color = Year)) +
+  geom_line(aes(group = Year)) +
+  geom_point() +
+  scale_color_brewer(palette = "Blues") +
+  theme(panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        panel.background = element_blank(),
+        legend.position = "top",
+        legend.title = element_blank(),
+        plot.title = element_text(size = 10, face = "bold", hjust = 0.5),
+        plot.caption = element_text(size = 6)
+  ) +
+  labs(x = "Priority Number",
+       y = "Count",
+       title = "Respiratory or Cardiac Medical Incidents by Month (2019 vs 2020)",
+       caption ="Source: Open Data Toronto")
+```
+
+```{r echo-line, fig.cap = "2019 vs 2020 Echo Incidents over Time", fig.pos = "H", out.width = '70%'}
+show(echo_line_graph)
+# knitr::include_graphics(here("outputs/paper/images/01_echo-line_graph.png")) Option for local files
+```
+Compared to 2019, 2020 saw incident peaks in **April**, **August**, and **October**. Incidents start trending up from February before hitting a peak in April, they proceed to remain constant during the Summer before rising again in the Winter. 
+
+## 2020 Echo Incidents Trend is Similar to COVID-19 Epidemic Curve
+
+Taking a look at the COVID-19 epidemic curve from the [Ministry of Health](https://www.toronto.ca/home/covid-19/covid-19-latest-city-of-toronto-news/covid-19-status-of-cases-in-toronto/)  [@citeMoH]:
+
+```{r ministry-of-health, echo=FALSE, fig.cap="Ministry of Health Epidemic Curve", fig.pos="H", out.width = '60%'}
+#This is a local file because LaTeX does not support external files. The file is accessible through the GitHub repo, otherwise the source of the image is hyperlinked above.
+knitr::include_graphics(here("outputs/paper/images/02_ministry-of-health_graph.png"))
+```
+CP24 [@citeCP24April] reported 550 (51.8% GTA) new cases in early April, with cases fluctuating until the Summer months and first lockdown reigned cases in, showing continuous weeks of low cases [@citeCTVSummer]. What differs is that although cases only started rising in October and persisted into the Winter, Echo incidents showed an interesting increase in August. However, Echo incidents likewise saw a sharp spike to beyond April levels in October and remained high till the end of 2020. 
+
+The question remains as to whether the 2020 Echo incident trend is special or not. Could other years report similar increase in incidents during Winter because of the cold weather? 
+
+## 2020 is a Special Year After All!
+I took all the sheets (2010-2020) from the paramedic incidents dataset, cleaned, merged, and filtered them all using tidyverse [@citeTidy], and plotted with ggplot2 [@citeGgplot2], with the gghighlight package responsible for the highlighting of 2020 [@citeGghighlight] (See Figure \@ref(fig:echo-11)). 
+
+```{r echo-11-tb, include=FALSE}
+#Creating Echo 11 Years Table 
+echo_11yr_count <-
+  paramedic11years_cleaned %>%
+  filter(Incident_Type == "Medical" & Priority_Code == "Echo") %>% # Filter by relevant fields
+  group_by(Year, Month) %>% #Group by Year and then Month 
+  count() %>% #Count number of incidents per year per month
+  ungroup()
+```
+
+```{r echo-11-plt, include=FALSE}
+#Plotting 11 Years Line Graph
+echo_11yr_line_graph  <- 
+  echo_11yr_count %>%
+  ggplot(aes(x = Month, y = n, group = Year)) +
+  geom_line(aes(color = Year)) + # aes(color) was done twice because otherwise gemo_point shows a different color
+  geom_point(aes(color = Year)) +
+  scale_color_manual(values=c("#60809f")) + # Forcing the color to be blue
+  gghighlight(Year == "2020") + # Assigns only 2020 to be highlighted and turns the rest grey
+  theme(panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        panel.background = element_blank(),
+        plot.title = element_text(size = 10, face = "bold", hjust = 0.5),
+        plot.caption = element_text(size = 6)
+  ) +
+  labs(title = "2010-2020 Comparison of Respiratory and Cardiac Emergencies",
+       caption ="Source: Open Data Toronto")  
+```
+
+```{r echo-11, echo=FALSE, fig.cap="11 Years of Respiratory/Cardiac Emergencies", fig.pos="H", out.width = '70%'}
+show(echo_11yr_line_graph) 
+# knitr::include_graphics(here("outputs/paper/images/03_echo-11yr-line_graph.png")) Option for local files. 
+```
+Comparing data across 11 years, the answer seems to be no, 2020 is indeed special. Not only do cases trend generally higher than other years, the April and October peaks are the highest in 11 years. Moreover, the 2020 trend does not bear any similarities to other years, with some years dipping in incidents during the Winter instead. Here’s a close up comparison of the trends between Echo incidents and COVID cases, plotted with ggplot [@citeGgplot2], and put together using the grid.Arrange function [@citeGridExtra] (See Figure \@ref(fig:echo-v-covid)): 
+
+```{r echo-v-covid-tb, include=FALSE}
+#Preparing the Data
+echo_2020_count <- 
+  echo_count %>% 
+  filter(Year == 2020) # Simple filter for 2020, counting 
+
+covid_echo <- merge(echo_2020_count, covid_monthCount, by.x = "Month", by.y = "Month") #Merging Datasets by the Month column 
+
+covid_echo <- covid_echo %>% 
+  rename(echo_number = n) #Renaming column for sanity
+```
+
+```{r echo-v-covid-plt, include=FALSE}
+#Plotting the COVID Graph
+case_number_trend <- 
+  covid_echo %>%
+  ggplot() +
+  geom_line(aes(x = Month, y = case_number, group = Year), color = "#bd4279") +
+  geom_point(aes(x = Month, y = case_number, group = Year), color = "#bd4279") +
+  theme(panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        panel.background = element_blank(),
+        plot.title = element_text(size = 10, face = "bold", hjust = 0.5),
+        plot.caption = element_text(size = 6)) +
+  labs(title = "2020 COVID Case Trend by Month",
+       caption ="Source: Open Data Toronto")  
+
+#Plotting the Echo Graph
+echo_number_trend <-
+  covid_echo %>%
+  ggplot() +
+  geom_line(aes(x = Month, y = echo_number, group = Year), color = "#60809f") +
+  geom_point(aes(x = Month, y = echo_number, group = Year), color = "#60809f") +
+  theme(panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        panel.background = element_blank(),
+        plot.title = element_text(size = 10, face = "bold", hjust = 0.5),
+        plot.caption = element_text(size = 6)) +
+  labs(title = "2020 Echo Incidents Trend by Month",
+       caption ="Source: Open Data Toronto")  
+```
+
+```{r echo-v-covid, echo=FALSE, fig.cap="2020 Echo Incidents vs COVID cases", fig.pos="H", out.width = '70%'}
+grid.arrange(echo_number_trend, case_number_trend, ncol = 2) # ncol = 2 puts the graphs side by side
+```
+Please note that the y-axis scale is different, the figure above is only meant to show the similarities in trends. 
+
+## Toronto Neighbourhoods' Uneven Distribution of Risk
+It would be a shame to end the project without looking at possible region similarities (or difference) between Echo incidents and COVID cases in Metropolitan Toronto. After downloading a shapefile from Statistics Canada from the 2016 Census and filtering for only ‘M’ FSA codes (covers Metropolitan Toronto) using rgdal [@citeRgdal], I merged the shapefile with both the Paramedic Incidents and COVID-19 dataset, and created heatmaps of case/incident numbers using ggplot2 [@citeGgplot2], merged with the gridExtra package [@citeGridExtra] (See Figure \@ref(fig:heatmap)). 
+
+```{r heatmap-plt, include=FALSE}
+# The Following Shapefile manipulation code follows a tutorial from https://unconj.ca/blog/choropleth-maps-with-r-and-ggplot2.html, full citation in References
+
+## Manipulation of Shapefile ##
+toronto.fsas <- fsas[substr(fsas$CFSAUID, 1, 1) == 'M',] # Extracts Toronto Postal Codes
+data <- ggplot2::fortify(toronto.fsas, region = "CFSAUID") # Turning object into something plottable by ggplot
+data$fsa <- factor(data$id) # Turns the id column into a factored fsa
+data$id <- NULL # Removes the id column
+
+## Cleanup ##
+rm(fsas) # fsas is quite large, removing to speed things up
+
+## Transforming data in preparation for merging ##
+
+# Covid Data
+covid_hospitalized_allmonths <- covid_hospitalized %>% # Creating a table that groups and counts by FSA
+  group_by(FSA) %>%
+  count() %>%
+  rename(fsa = FSA) %>% #rename FSA to fsa to join later
+  rename(covidcases = n) #rename n into something more understandable
+
+plot.data_covid_allmonths <- left_join(data, covid_hospitalized_allmonths) # Merge the location data with the covid data, joining under the "fsa" column. left_join is used because merge causes polygon tearing.
+
+# Paramedic Incident Data (2020)
+paramedic2020_map_allmonths <- paramedic20192020_cleaned %>% # Creating a table that groups and counts by FSA
+  filter(Year == "2020") %>% 
+  group_by(Forward_Sortation_Area) %>%
+  count() %>%
+  rename(fsa = Forward_Sortation_Area) %>% # rename Forward_Sortation_Area to fsa to join later
+  rename(echo2020cases = n) #rename n into something more understandable
+
+plot.data_para_allmonths <- left_join(data, paramedic2020_map_allmonths) # Merge the location data with paramedic data, joining under the "fsa" column. left_join is used because merge causes polygon tearing.
+
+# Paramedic Incident Data (2019)
+paramedic2019_map_allmonths <- paramedic20192020_cleaned %>% # Creating a table that groups and counts by FSA
+  filter(Year == "2019") %>% 
+  group_by(Forward_Sortation_Area) %>%
+  count() %>%
+  rename(fsa = Forward_Sortation_Area) %>% # rename Forward_Sortation_Area to fsa to join later
+  rename(echo2019cases = n) #rename n into something more understandable
+  
+
+plot.data_para_2019 <- left_join(data, paramedic2019_map_allmonths) # Merge the location data with paramedic data, joining under the "fsa" column. left_join is used because merge causes polygon tearing.
+
+## Plotting the Maps ##
+# Covid Map
+covid_map <- ggplot(plot.data_covid_allmonths, aes(x = long, y = lat, group = group, fill = covidcases)) +
+  geom_polygon() +
+  coord_equal() +
+  scale_fill_continuous(high = "#cc3350", low = "#33CCAF") + # Adjusting Heatmap colors 
+  theme(panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text = element_blank(),
+        panel.background = element_blank(),
+        legend.title = element_blank(),
+        plot.title = element_text(size = 10, face = "bold", hjust = 0.5),
+        plot.caption = element_text(size = 6)) +
+  labs(title = "Toronto COVID-19 Cases Heatmap",
+       caption ="Source: Open Data Toronto")  
+
+# Paramedic Map (2020)
+paramedic_map <- ggplot(plot.data_para_allmonths, aes(x = long, y = lat, group = group, fill = echo2020cases)) +
+  geom_polygon() +
+  coord_equal() +
+  scale_fill_continuous(high = "#cc3350", low = "#33CCAF") + # Adjusting Heatmap colors 
+  theme(panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text = element_blank(),
+        panel.background = element_blank(),
+        legend.title = element_blank(),
+        plot.title = element_text(size = 10, face = "bold", hjust = 0.5),
+        plot.caption = element_text(size = 6)) +
+  labs(title = "Toronto Echo Incidents Heatmap",
+       caption ="Source: Open Data Toronto")  
+
+# Paramedic Map (2019)
+
+map2019 <- ggplot(plot.data_para_2019, aes(x = long, y = lat, group = group, fill = echo2019cases)) +
+  geom_polygon() +
+  coord_equal() +
+  scale_fill_continuous(high = "#cc3350", low = "#33CCAF") + # Adjusting Heatmap colors 
+  theme(panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text = element_blank(),
+        panel.background = element_blank(),
+        legend.title = element_blank(),
+        plot.title = element_text(size = 10, face = "bold", hjust = 0.5),
+        plot.caption = element_text(size = 6)) +
+  labs(title = "Toronto 2019 Echo Incidents Heatmap",
+       caption ="Source: Open Data Toronto")  
+```
+
+```{r heatmap, echo=FALSE, fig.cap="Toronto Heatmap (2020): Echo vs COVID", fig.pos="H"}
+grid.arrange(paramedic_map, covid_map, ncol = 2)
+```
+First thing to note is that once again the scale is different, there are vastly more Echo incidents than COVID cases in 2020. Scale aside, the red portions of the map eerily overlap. On the top-left of Toronto, upper Etobicoke - the Etobicoke General Hospital and Jane and Finch areas show the highest number of COVID cases; similarly the two areas are ranked 4th and 9th highest for Echo incidents in 2020 (See Tables \@ref(tab:covid-map-results-table), \@ref(tab:echo-map-results-table)). The question for future research becomes what makes three fifths of the top Echo-incident neighbourhoods also have be at a higher risk from COVID-19 and what makes others not? 
+
+```{r covid-map-results-table, results = "asis", fig.pos="H", out.width = '70%'}
+top10_covid <- head(covid_hospitalized_allmonths[order(-covid_hospitalized_allmonths$covidcases),],10) %>% # order with - makes it decreasing; specifying head(10) to show top 10
+  na.omit() # removes NAs in results
+
+top10_covid$fsa = cell_spec(top10_covid$fsa, background = ifelse(top10_covid$fsa %in% c("M5A","M6K","M4Y","M9V","M1K","M5V","M1E","M3N","M4C","M5B"), "blue", "white"), color = ifelse(top10_covid$fsa %in% c("M5A","M6K","M4Y","M9V","M1K","M5V","M1E","M3N","M4C","M5B"), "white", "black")) # Ifelse cell contains these postal codes, which are the top 10 echo incidents, then color and background change
+
+knitr::kable(top10_covid, escape = F,
+      col.names = c("Forward Sortation Area","COVID Cases"),
+      align = "cc",
+      caption = "Top 10 Highest COVID Cases Toronto Neighbourhoods") %>%
+  row_spec(0,bold=TRUE) %>% # Bold Column names, Row 0 = first row
+  kable_styling(full_width = F, latex_options = "hold_position") %>%
+  add_footnote("Neighbourhoods also in the top 10 Echo table are highlighted in blue")
+```
+
+
+```{r echo-map-results-table, results = "asis", fig.pos="H", out.width = '70%'}
+top10_echo <- head(paramedic2020_map_allmonths[order(-paramedic2020_map_allmonths$echo2020cases),],10) # order with - makes it decreasing; specifying head(10) to show top 10
+
+top10_echo$fsa = cell_spec(top10_echo$fsa, background = ifelse(top10_echo$fsa %in% c("M9V", "M3N", "M1P", "M1B", "M6M", "M6K", "M9N", "M1W", "M3J", "M5A"), "red", "white"), color = ifelse(top10_echo$fsa %in% c("M9V", "M3N", "M1P", "M1B", "M6M", "M6K", "M9N", "M1W", "M3J", "M5A"), "white", "black")) # Ifelse cell contains these postal codes, which are the top 10 COVID cases, then color and background change
+
+  kable(top10_echo, escape = F,
+      col.names = c("Forward Sortation Area","Echo Incidents"),
+      align = "cc",
+      caption = "Top 10 Highest Echo Incidents Toronto Neighbourhoods") %>%
+  row_spec(0,bold=TRUE) %>%
+  kable_styling(full_width = F, latex_options = "hold_position") %>%
+  add_footnote("Neighbourhoods also in the top 10 COVID table are highlighted in red")
+```
+
+Lastly, if you were wondering if COVID-19 caused those neighbourhoods to have high Echo incidents, I generated a heatmap of Echo incidents in 2019 as well (See Figure \@ref(fig:heatmap-2019)). The areas with red show no noticiable difference compared to 2020, which means that the neighbourhoods were alreadt predisposed to medical emergencies.   
+
+```{r heatmap-2019, echo=FALSE, fig.cap="Toronto Echo Heatmap (2019)", fig.pos="H", out.width = '50%'}
+show(map2019)
+```
+
+# Moving Forward
+The results have demonstrated that there are select neighbourhoods that are just generally higher risk, not to anyone's surprise.
+What this project has shown is where these neighbourhoods are, and that looking at the trend of monthly incidents, with Echo-level incidents mirroring the COVID-19 epidemic curve, that it is likely that those same neighbourhoods are hit harder by the pandemic. It would be interesting for further research to drill down into what makes these regions different, be it income, demographic, or something else. Also The media only targets the hardest hit neighbourhoods, but as the heatmap shows, there is a consistent and significant differece between 1/3 of Toronto and the rest of the area.  
+
+# Limitations
+As mentioned, the data provided isn’t fully reliable. Reported Date of COVID-19 cases is never a true representation of when cases happen, the study’s hopes that the aggregation of cases into months helps mitigate some of the unreliability. The priority number of the pandemic incidents must also be kept in mind to be an high level summarization of a pre-determined coding system that is ultimately arbitrarily determined to cover most scenarios but not all. Moreover, the MDPS system leans towards over-triage, therefore a portion of Echo-level incidents will likely be miscategorized. These biases and limitations must be kept in mind when looking at the results and moving forward. 
+
+# References
+```{r}
+
+```
+
