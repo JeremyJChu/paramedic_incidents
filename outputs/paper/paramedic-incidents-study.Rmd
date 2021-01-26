@@ -508,7 +508,3 @@ What this project has shown is where these neighbourhoods are, and that looking 
 As mentioned, the data provided isn’t fully reliable. Reported Date of COVID-19 cases is never a true representation of when cases happen, the study’s hopes that the aggregation of cases into months helps mitigate some of the unreliability. The priority number of the pandemic incidents must also be kept in mind to be an high level summarization of a pre-determined coding system that is ultimately arbitrarily determined to cover most scenarios but not all. Moreover, the MDPS system leans towards over-triage, therefore a portion of Echo-level incidents will likely be miscategorized. These biases and limitations must be kept in mind when looking at the results and moving forward. 
 
 # References
-```{r}
-
-```
-
