@@ -37,6 +37,9 @@ The project is entirely reproducible. All data downloading, cleaning, and transf
 I have also taken the liberty in saving all the raw and cleaned datasets and stored them [here](inputs/data). The R Markdown contains the both options of either running the scripts or reading in the data from inputs, simply comment/uncomment the parts you would like to run. Clone the repo and everything will be there. 
 
 ## Changelog
+2021-01-26 (Second Update)
+- Pushed literature
+
 2021-01-26
 - Pushed first draft. Currently missing final edits and literature files. Testing tbd on reproducibility on another comptuer 
 
