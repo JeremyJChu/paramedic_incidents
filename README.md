@@ -1,9 +1,9 @@
-# Paramedic Life Threatening Medical Emergencies vs COVID-19 Epidemic Curve: Exposing the Toronto Neighbourhood Gap
+# Paramedic Life Threatening Medical Emergencies vs COVID-19 Hospitalizations: Exposing the Toronto Neighbourhood Gap
 Sourcing from the city of Toronto's [Open Data Portal](https://open.toronto.ca/), this project performs explaratory data analysis (EDA) on the [Paramedic Services Incident Dataset](https://open.toronto.ca/dataset/paramedic-services-incident-data/) and the [COVID-19 Cases in Toronto Dataset](https://open.toronto.ca/dataset/covid-19-cases-in-toronto/). The heatmap shapefile was obtained from Statistics Canada's [Forward Sortation Area](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm) file.
 ## Questions Asked
 - Did the data show an increase in life threatening respiratory/cardiac (coded as Echo) emergencies in 2020 as compared to previous years?
 - If so, was 2020 a uniquely **bad** year?
-- Were there similarities between the Echo emergencies trend and the COVID-19 epidemic curve?
+- Were there similarities between the Echo emergencies trend and the COVID-19 hospitalization trend?
 - Which neighbourhoods in Toronto were at risk, and of what?
 ## Packages
 This project was done entirely with R through R Studio. Results were knitted into a pdf through R Markdown. Packages used:
