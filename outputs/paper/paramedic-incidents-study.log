@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.15)  25 JAN 2021 20:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.27)  27 JAN 2021 18:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -610,16 +610,16 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 \openout4 = `paramedic-incidents-study.toc'.
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 112.
+(Font)              <9> on input line 110.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 112.
+(Font)              <5> on input line 110.
 [2] [3]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-65.
+63.
 (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Overfull \hbox (11.14227pt too wide) in paragraph at lines 181--202
+Overfull \hbox (11.14227pt too wide) in paragraph at lines 179--200
  [][] 
  []
 
@@ -627,7 +627,7 @@ Overfull \hbox (11.14227pt too wide) in paragraph at lines 181--202
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.209 
+l.207 
       ]
 <paramedic-incidents-study_files/figure-latex/medical-bar-1.pdf, id=128, 443.65
 75pt x 316.18124pt>
@@ -635,7 +635,7 @@ File: paramedic-incidents-study_files/figure-latex/medical-bar-1.pdf Graphic fi
 le (type pdf)
 <use paramedic-incidents-study_files/figure-latex/medical-bar-1.pdf>
 Package pdftex.def Info: paramedic-incidents-study_files/figure-latex/medical-b
-ar-1.pdf  used on input line 229.
+ar-1.pdf  used on input line 227.
 (pdftex.def)             Requested size: 328.82266pt x 234.34193pt.
 [5]
 <paramedic-incidents-study_files/figure-latex/echo-line-1.pdf, id=139, 459.7175
@@ -644,18 +644,18 @@ File: paramedic-incidents-study_files/figure-latex/echo-line-1.pdf Graphic file
  (type pdf)
 <use paramedic-incidents-study_files/figure-latex/echo-line-1.pdf>
 Package pdftex.def Info: paramedic-incidents-study_files/figure-latex/echo-line
--1.pdf  used on input line 240.
+-1.pdf  used on input line 238.
 (pdftex.def)             Requested size: 328.84282pt x 226.16919pt.
 [6pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.248 
+l.246 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.248 
+l.246 
        <./paramedic-incidents-study_files/figure-latex/medical-bar-1.pdf> <./pa
 ramedic-incidents-study_files/figure-latex/echo-line-1.pdf>]
 </Users/jeremyjchu/Documents/iSchool/R/Projects/paramedic_incidents/outputs/pap
@@ -666,7 +666,7 @@ s/paper/images/02_ministry-of-health_graph.png Graphic file (type png)
 /paper/images/02_ministry-of-health_graph.png>
 Package pdftex.def Info: /Users/jeremyjchu/Documents/iSchool/R/Projects/paramed
 ic_incidents/outputs/paper/images/02_ministry-of-health_graph.png  used on inpu
-t line 256.
+t line 254.
 (pdftex.def)             Requested size: 281.84787pt x 168.59975pt.
 <paramedic-incidents-study_files/figure-latex/echo-11-1.pdf, id=166, 459.7175pt
  x 316.18124pt>
@@ -674,44 +674,42 @@ File: paramedic-incidents-study_files/figure-latex/echo-11-1.pdf Graphic file (
 type pdf)
 <use paramedic-incidents-study_files/figure-latex/echo-11-1.pdf>
 Package pdftex.def Info: paramedic-incidents-study_files/figure-latex/echo-11-1
-.pdf  used on input line 274.
+.pdf  used on input line 272.
 (pdftex.def)             Requested size: 328.84282pt x 226.16919pt.
 [7pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.280 
+l.278 
        </Users/jeremyjchu/Documents/iSchool/R/Projects/paramedic_incidents/outp
 uts/paper/images/02_ministry-of-health_graph.png>]
-<paramedic-incidents-study_files/figure-latex/echo-v-covid-1.pdf, id=178, 459.7
-175pt x 316.18124pt>
-File: paramedic-incidents-study_files/figure-latex/echo-v-covid-1.pdf Graphic f
-ile (type pdf)
-<use paramedic-incidents-study_files/figure-latex/echo-v-covid-1.pdf>
+<paramedic-incidents-study_files/figure-latex/echo-v-covid2-1.pdf, id=178, 463.
+7325pt x 316.18124pt>
+File: paramedic-incidents-study_files/figure-latex/echo-v-covid2-1.pdf Graphic 
+file (type pdf)
+<use paramedic-incidents-study_files/figure-latex/echo-v-covid2-1.pdf>
 Package pdftex.def Info: paramedic-incidents-study_files/figure-latex/echo-v-co
-vid-1.pdf  used on input line 285.
-(pdftex.def)             Requested size: 328.84282pt x 226.16919pt.
+vid2-1.pdf  used on input line 283.
+(pdftex.def)             Requested size: 328.83488pt x 224.2056pt.
 [8pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.295 ...ghbourhoods-uneven-distribution-of-risk}}
-                                                  pdfTeX warning (ext4): destin
-ation with the same identifier (name{figure.5}) has been already used, duplicat
-e ignored
+l.291 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.295 ...ghbourhoods-uneven-distribution-of-risk}}
-                                                   <./paramedic-incidents-study
-_files/figure-latex/echo-11-1.pdf> <./paramedic-incidents-study_files/figure-la
-tex/echo-v-covid-1.pdf>]
-<paramedic-incidents-study_files/figure-latex/heatmap-1.pdf, id=205, 450.68375p
-t x 173.64874pt>
-File: paramedic-incidents-study_files/figure-latex/heatmap-1.pdf Graphic file (
-type pdf)
-<use paramedic-incidents-study_files/figure-latex/heatmap-1.pdf>
-Package pdftex.def Info: paramedic-incidents-study_files/figure-latex/heatmap-1
-.pdf  used on input line 301.
+l.291 
+       <./paramedic-incidents-study_files/figure-latex/echo-11-1.pdf> <./parame
+dic-incidents-study_files/figure-latex/echo-v-covid2-1.pdf>]
+<paramedic-incidents-study_files/figure-latex/heatmap-compare-1.pdf, id=205, 45
+0.68375pt x 173.64874pt>
+File: paramedic-incidents-study_files/figure-latex/heatmap-compare-1.pdf Graphi
+c file (type pdf)
+<use paramedic-incidents-study_files/figure-latex/heatmap-compare-1.pdf>
+Package pdftex.def Info: paramedic-incidents-study_files/figure-latex/heatmap-c
+ompare-1.pdf  used on input line 299.
 (pdftex.def)             Requested size: 450.69638pt x 173.65361pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -725,41 +723,41 @@ File: paramedic-incidents-study_files/figure-latex/heatmap-2019-1.pdf Graphic f
 ile (type pdf)
 <use paramedic-incidents-study_files/figure-latex/heatmap-2019-1.pdf>
 Package pdftex.def Info: paramedic-incidents-study_files/figure-latex/heatmap-2
-019-1.pdf  used on input line 378.
+019-1.pdf  used on input line 375.
 (pdftex.def)             Requested size: 234.88214pt x 202.15266pt.
 [9pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.384 
-       <./paramedic-incidents-study_files/figure-latex/heatmap-1.pdf>]
-Overfull \vbox (15.54613pt too high) has occurred while \output is active []
+l.381 
+       <./paramedic-incidents-study_files/figure-latex/heatmap-compare-1.pdf>]
+Overfull \vbox (1.94614pt too high) has occurred while \output is active []
 
 [10pdfTeX warning (ext4): destination with the same identifier (name{table.2}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.384 
+l.381 
       pdfTeX warning (ext4): destination with the same identifier (name{table.3
 }) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.384 
+l.381 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.384 
+l.381 
        <./paramedic-incidents-study_files/figure-latex/heatmap-2019-1.pdf>] [11
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 434--436
+Underfull \hbox (badness 10000) in paragraph at lines 431--433
 []$\T1/lmr/m/n/10.95 https : / / www . toronto . ca / home / covid -[] 19 / cov
 id -[] 19 -[] latest -[] city -[] of -[] toronto -[] news / covid -[] 19 -[] st
 atus -[] of -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 440--442
+Underfull \hbox (badness 10000) in paragraph at lines 437--439
 \T1/lmr/m/n/10.95 / / ckan0 . cf . opendata . inter . prod -[] toronto . ca / d
 ataset / c21f3bd1 -[] e016 -[] 4469 -[] abf5 -[] c58bb8e8b5ce /
  []
@@ -771,12 +769,12 @@ ed.
  ) 
 Here is how much of TeX's memory you used:
  12530 strings out of 481252
- 182991 string characters out of 5914560
- 490906 words of memory out of 5000000
+ 183063 string characters out of 5914560
+ 490964 words of memory out of 5000000
  29117 multiletter control sequences out of 15000+600000
  468660 words of font info for 74 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 71i,13n,74p,1144b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,13n,74p,1161b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/jeremyjchu/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</
 Users/jeremyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></
 Users/jeremyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></
@@ -788,7 +786,7 @@ rs/jeremyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users
 eremyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></Users/jer
 emyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/jer
 emyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on paramedic-incidents-study.pdf (12 pages, 837778 bytes).
+Output written on paramedic-incidents-study.pdf (12 pages, 838404 bytes).
 PDF statistics:
  379 PDF objects out of 1000 (max. 8388607)
  328 compressed objects within 4 object streams

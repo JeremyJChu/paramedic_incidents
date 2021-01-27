@@ -1,5 +1,5 @@
 ---
-title: "Paramedic Life Threatening Medical Emergencies Mirror COVID-19 Epidemic Curve in 2020: Exposing the Toronto Neighbourhood Gap"
+title: "Paramedic Life Threatening Medical Emergencies Mirror COVID-19 Hospitalization Trends in 2020: Exposing the Toronto Neighbourhood Gap"
 author: "Jeremy Chu"
 date: "25/01/2021"
 classoption: table
@@ -8,7 +8,7 @@ header-includes:
   \usepackage{float}
   \usepackage{colortbl} 
   \arrayrulecolor{white}
-abstract: "Through exploratory data analysis (EDA) on the Paramedic Medical Incidents 2010-2020 dataset, and the COVID-19 Case Numbers dataset from Open Data Toronto, this study shows that while 2020 had less overall medical emergencies than 2019, it had more occurances of life threatening respiratory/cardiac (Echo-level) incidents. Plotting a line graph comparing the Echo incident trend with the COVID-19 epidemic curve reveals a similar trajectory: A peak in April, followed by a steady Summer before escalating again in the Winter starting in October. In addition, through creatin heatmaps of paramedic Echo-incidents in 2020 and 2019, along with COVID-19 cases in 2020, the study shows that there are interesting overlaps among Toronto neighbourhoods, with North-Western Etobicoke (Jane and Finch) for example that exhibits high risk in both COVID-19 and Echo-incidents. Ultimately the results hope to inform future research into examining the relationship between Echo-incidents and COVID-19, and look at why certain neighbourhoods are all around higher risk at both crises while others might only be at risk in one" 
+abstract: "Through exploratory data analysis (EDA) on the Paramedic Medical Incidents 2010-2020 dataset, and the COVID-19 Case Numbers dataset from Open Data Toronto, this study shows that while 2020 had less overall medical emergencies than 2019, it had more occurances of life threatening respiratory/cardiac (Echo-level) incidents. Plotting a line graph comparing the Echo incident trend with the COVID-19 hospitalization curve reveals a similar trajectory: A peak in April, followed by a steady Summer before escalating again in the Winter starting in October. In addition, through creating heatmaps of paramedic Echo-incidents in 2020 and 2019, along with COVID-19 hospitlizations in 2020, the study shows that there are interesting overlaps among Toronto neighbourhoods, with North-Western Etobicoke (Jane and Finch) for example that exhibits high risk in both COVID-19 hospitalizations and Echo-incidents. Ultimately the results hope to inform future research into examining the relationship between Echo-incidents and COVID-19, and look at why certain neighbourhoods are at a higher risk of being hospitalized for COVID than others."
 bibliography: references.bib
 fontsize: 11pt
 mainfont: Calibri
@@ -64,6 +64,7 @@ paramedic20192020_cleaned <- read_csv(here("inputs","data","2019-2020_paramedic-
 paramedic11years_cleaned <- read_csv(here("inputs","data","2010-2020_paramedic-incidents_cleaned.csv"))
 covid_monthCount <- read_csv(here("inputs","data","2020_covid-cases_cleaned.csv"))
 covid_hospitalized <- read_csv(here("inputs", "data", "2020_covid-cases-hospitalization_cleaned.csv"))
+covid_fullmonthCount <- read_csv(here("inputs", "data", "2020_covid-cases-full_cleaned.csv"))
 ```
 
 ```{r data-cleaning, include=FALSE}
@@ -91,13 +92,11 @@ fsas <-  readOGR(dsn = Toronto_SHP_file, layer = "lfsa000b16a_e")
 
 # Introduction
 
-The deadliness of COVID-19 has been swamped with misinformation and confusion. To make sense of how the pandemic has been impacting the Metropolitan Toronto Area specifically, this project asks whether there had been an increase in life-threatening respiratory or cardiac emergencies within the region during 2020. Drawing upon the Paramedic Services Incident Data 2010-2020 and the COVID-19 Cases in Toronto datasets from Toronto’s Open Data Catalogue, this project firstly draws comparisons between medical emergencies in 2020 and the past 11 years, then proceeds to compare the trend of 2020 medical emergencies with COVID-19 case trends. Lastly, 2 heatmaps were created to investigate whether the regions with high medical emergencies coincided with at-risk COVID-19 areas, creating potential for future research. 
+The deadliness of COVID-19 has been swamped with misinformation and confusion. To make sense of how the pandemic has been impacting the Metropolitan Toronto Area specifically, this project asks whether there had been an increase in life-threatening respiratory or cardiac emergencies within the region during 2020. Drawing upon the Paramedic Services Incident Data 2010-2020 and the COVID-19 Cases in Toronto datasets from Toronto’s Open Data Catalogue, this project firstly draws comparisons between medical emergencies in 2020 and the past 11 years, then proceeds to compare the trend of 2020 medical emergencies with COVID-19 hospitalization trends. Lastly, 2 heatmaps were created to investigate whether the regions with high medical emergencies coincided with areas that had more COVID-19 hospitalizations, creating potential for future research. 
 
-The results were telling. While it was surprising that 2020 actually reported less overall medical emergencies (of all severity) than 2019, once the data was filtered down to the Echo-level (life-threatening respiratory or cardiac) emergencies in 2020, and then compared to the COVID-19 trend line, it is apparent that both trends mimic each other: **Rise to a peak in April, stabilize during the Summer, and then gradually increase reaching a peak in October and remaining high in the Winter.** A cross-reference with news articles and data from the Ontario Ministry of Health adds further support. When both paramedic and COVID data was geomapped onto Statistics Canada’s 2016 Census Boundary Forward Sortation Area file, the results showed significant overlap in neighbourhoods both having issues with higher numbers of Echo-level incidents and COVID-19 cases.
+The results were telling. While it was surprising that 2020 actually reported less overall medical emergencies (of all severity) than 2019, once the data was filtered down to the Echo-level (life-threatening respiratory or cardiac) emergencies in 2020, and then compared to the COVID-19 hospitalization line, it is apparent that both trends mimic each other, and COVID-19's overall epidemic curve in general: **Rise to a peak in April, stabilize during the Summer, and then spiking in October before remaining high in the Winter.** A cross-reference with news articles and data from the Ontario Ministry of Health adds further support. When both paramedic and COVID data was geomapped onto Statistics Canada’s 2016 Census Boundary Forward Sortation Area file, the results showed significant overlap in neighbourhoods both having issues with higher numbers of Echo-level incidents and COVID-19 hospitalizations.
 
-The issue regarding these results is that they require diving into a degree granularity before the serious impacts of COVID-19 can be gleaned. For most people, as the heatmap will show, will see the data being influenced by the large portions of “low-risk” neighbourhoods. Indeed, for most neighbourhoods, the lockdown has indeed led to 2020 having less overall medical emergencies compared to 2019. However, for select neighbourhoods, the data shows a completely different story, and opens up opportunities for policy makers to dive in. 
-
-^[GitHub repository for study: https://github.com/JeremyJChu/paramedic_incidents]
+The issue regarding these results is that they require diving into a degree granularity before the serious impacts of COVID-19 can be gleaned. For most people, as the heatmap will show, will see the data being influenced by the large portions of “low-risk” neighbourhoods. Indeed, for most neighbourhoods, the lockdown has indeed led to 2020 having less overall medical emergencies compared to 2019. However, for select neighbourhoods, the data shows a completely different story, and opens up opportunities for policy makers to dive in. The project can be accessed on Github.^[GitHub repository for study: https://github.com/JeremyJChu/paramedic_incidents]
 
 # Methods 
 
@@ -271,7 +270,7 @@ knitr::include_graphics(here("outputs/paper/images/02_ministry-of-health_graph.p
 ```
 CP24 [@citeCP24April] reported 550 (51.8% GTA) new cases in early April, with cases fluctuating until the Summer months and first lockdown reigned cases in, showing continuous weeks of low cases [@citeCTVSummer]. What differs is that although cases only started rising in October and persisted into the Winter, Echo incidents showed an interesting increase in August. However, Echo incidents likewise saw a sharp spike to beyond April levels in October and remained high till the end of 2020. 
 
-The question remains as to whether the 2020 Echo incident trend is special or not. Could other years report similar increase in incidents during Winter because of the cold weather? 
+The question remains as to whether the 2020 Echo incident trend is special or not. Could other years report similar increase in incidents during Winter because of the cold weather? In addtion, as we are looking at paramedic data, it is also important to know whether COVID-19 hospitalizations follow a similar trend. 
 
 ## 2020 is a Special Year After All!
 I took all the sheets (2010-2020) from the paramedic incidents dataset, cleaned, merged, and filtered them all using tidyverse [@citeTidy], and plotted with ggplot2 [@citeGgplot2], with the gghighlight package responsible for the highlighting of 2020 [@citeGghighlight] (See Figure \@ref(fig:echo-11)). 
@@ -310,7 +309,7 @@ echo_11yr_line_graph  <-
 show(echo_11yr_line_graph) 
 # knitr::include_graphics(here("outputs/paper/images/03_echo-11yr-line_graph.png")) Option for local files. 
 ```
-Comparing data across 11 years, the answer seems to be no, 2020 is indeed special. Not only do cases trend generally higher than other years, the April and October peaks are the highest in 11 years. Moreover, the 2020 trend does not bear any similarities to other years, with some years dipping in incidents during the Winter instead. Here’s a close up comparison of the trends between Echo incidents and COVID cases, plotted with ggplot [@citeGgplot2], and put together using the grid.Arrange function [@citeGridExtra] (See Figure \@ref(fig:echo-v-covid)): 
+Comparing data across 11 years, the answer seems to be no, 2020 is indeed special. Not only do cases trend generally higher than other years, the April and October peaks are the highest in 11 years. Moreover, the 2020 trend does not bear any similarities to other years, with some years dipping in incidents during the Winter instead. When we compare the trends between Echo incidents and COVID hospitalizations, unsurprisingly the line follows the overall COVID epidemic curve as well (See Figure \@ref(fig:echo-v-covid2)) (Plotted with ggplot [@citeGgplot2] and grid.Arrange [@citeGridExtra]). This means that we are seeing increased Echo-incidents and COVID hospitalizations in the same month, opening up further opportunities for research.
 
 ```{r echo-v-covid-tb, include=FALSE}
 #Preparing the Data
@@ -337,7 +336,7 @@ case_number_trend <-
         panel.background = element_blank(),
         plot.title = element_text(size = 10, face = "bold", hjust = 0.5),
         plot.caption = element_text(size = 6)) +
-  labs(title = "2020 COVID Case Trend by Month",
+  labs(title = "2020 COVID Hospitalization Trend by Month",
        caption ="Source: Open Data Toronto")  
 
 #Plotting the Echo Graph
@@ -356,13 +355,13 @@ echo_number_trend <-
        caption ="Source: Open Data Toronto")  
 ```
 
-```{r echo-v-covid, echo=FALSE, fig.cap="2020 Echo Incidents vs COVID cases", fig.pos="H", out.width = '70%'}
+```{r echo-v-covid2, echo=FALSE, fig.cap="2020 Echo Incidents vs COVID cases", fig.pos="H", out.width = '70%', out.height= '80%'}
 grid.arrange(echo_number_trend, case_number_trend, ncol = 2) # ncol = 2 puts the graphs side by side
 ```
 Please note that the y-axis scale is different, the figure above is only meant to show the similarities in trends. 
 
 ## Toronto Neighbourhoods' Uneven Distribution of Risk
-It would be a shame to end the project without looking at possible region similarities (or difference) between Echo incidents and COVID cases in Metropolitan Toronto. After downloading a shapefile from Statistics Canada from the 2016 Census and filtering for only ‘M’ FSA codes (covers Metropolitan Toronto) using rgdal [@citeRgdal], I merged the shapefile with both the Paramedic Incidents and COVID-19 dataset, and created heatmaps of case/incident numbers using ggplot2 [@citeGgplot2], merged with the gridExtra package [@citeGridExtra] (See Figure \@ref(fig:heatmap)). 
+It would be a shame to end the project without looking at possible region similarities (or difference) between Echo incidents and COVID hospitalizations in Metropolitan Toronto. After downloading a shapefile from Statistics Canada from the 2016 Census and filtering for only ‘M’ FSA codes (covers Metropolitan Toronto) using rgdal [@citeRgdal], I merged the shapefile with both the Paramedic Incidents and COVID-19 dataset, and created heatmaps of case/incident numbers using ggplot2 [@citeGgplot2], merged with the gridExtra package [@citeGridExtra] (See Figure \@ref(fig:heatmap-compare)). 
 
 ```{r heatmap-plt, include=FALSE}
 # The Following Shapefile manipulation code follows a tutorial from https://unconj.ca/blog/choropleth-maps-with-r-and-ggplot2.html, full citation in References
@@ -422,7 +421,7 @@ covid_map <- ggplot(plot.data_covid_allmonths, aes(x = long, y = lat, group = gr
         legend.title = element_blank(),
         plot.title = element_text(size = 10, face = "bold", hjust = 0.5),
         plot.caption = element_text(size = 6)) +
-  labs(title = "Toronto COVID-19 Cases Heatmap",
+  labs(title = "Toronto COVID-19 Hospitalization Heatmap",
        caption ="Source: Open Data Toronto")  
 
 # Paramedic Map (2020)
@@ -459,10 +458,10 @@ map2019 <- ggplot(plot.data_para_2019, aes(x = long, y = lat, group = group, fil
        caption ="Source: Open Data Toronto")  
 ```
 
-```{r heatmap, echo=FALSE, fig.cap="Toronto Heatmap (2020): Echo vs COVID", fig.pos="H"}
+```{r heatmap-compare, echo=FALSE, fig.cap="Toronto Heatmap (2020): Echo vs COVID", fig.pos="H"}
 grid.arrange(paramedic_map, covid_map, ncol = 2)
 ```
-First thing to note is that once again the scale is different, there are vastly more Echo incidents than COVID cases in 2020. Scale aside, the red portions of the map eerily overlap. On the top-left of Toronto, upper Etobicoke - the Etobicoke General Hospital and Jane and Finch areas show the highest number of COVID cases; similarly the two areas are ranked 4th and 9th highest for Echo incidents in 2020 (See Tables \@ref(tab:covid-map-results-table), \@ref(tab:echo-map-results-table)). The question for future research becomes what makes three fifths of the top Echo-incident neighbourhoods also have be at a higher risk from COVID-19 and what makes others not? 
+First thing to note is that once again the scale is different, there are vastly more Echo incidents than COVID cases that resulted in hospitalizations in 2020. Scale aside, the red portions of the map eerily overlap. On the top-left of Toronto, upper Etobicoke - the Etobicoke General Hospital and Jane and Finch areas show the highest number of COVID hospitalizations; similarly the two areas are ranked 4th and 9th highest for Echo incidents in 2020 (See Tables \@ref(tab:covid-map-results-table), \@ref(tab:echo-map-results-table)). The question for future research becomes what makes three fifths of the top Echo-incident neighbourhoods also be at a higher risk from COVID-19 emergencies and what makes others not? 
 
 ```{r covid-map-results-table, results = "asis", fig.pos="H", out.width = '70%'}
 top10_covid <- head(covid_hospitalized_allmonths[order(-covid_hospitalized_allmonths$covidcases),],10) %>% # order with - makes it decreasing; specifying head(10) to show top 10
@@ -471,9 +470,9 @@ top10_covid <- head(covid_hospitalized_allmonths[order(-covid_hospitalized_allmo
 top10_covid$fsa = cell_spec(top10_covid$fsa, background = ifelse(top10_covid$fsa %in% c("M5A","M6K","M4Y","M9V","M1K","M5V","M1E","M3N","M4C","M5B"), "blue", "white"), color = ifelse(top10_covid$fsa %in% c("M5A","M6K","M4Y","M9V","M1K","M5V","M1E","M3N","M4C","M5B"), "white", "black")) # Ifelse cell contains these postal codes, which are the top 10 echo incidents, then color and background change
 
 knitr::kable(top10_covid, escape = F,
-      col.names = c("Forward Sortation Area","COVID Cases"),
+      col.names = c("Forward Sortation Area","COVID Hospitalizations"),
       align = "cc",
-      caption = "Top 10 Highest COVID Cases Toronto Neighbourhoods") %>%
+      caption = "Top 10 Highest COVID Hospitalization Toronto Neighbourhoods") %>%
   row_spec(0,bold=TRUE) %>% # Bold Column names, Row 0 = first row
   kable_styling(full_width = F, latex_options = "hold_position") %>%
   add_footnote("Neighbourhoods also in the top 10 Echo table are highlighted in blue")
@@ -494,7 +493,7 @@ top10_echo$fsa = cell_spec(top10_echo$fsa, background = ifelse(top10_echo$fsa %i
   add_footnote("Neighbourhoods also in the top 10 COVID table are highlighted in red")
 ```
 
-Lastly, if you were wondering if COVID-19 caused those neighbourhoods to have high Echo incidents, I generated a heatmap of Echo incidents in 2019 as well (See Figure \@ref(fig:heatmap-2019)). The areas with red show no noticiable difference compared to 2020, which means that the neighbourhoods were alreadt predisposed to medical emergencies.   
+Lastly, if you were wondering if COVID-19 caused those neighbourhoods to have high Echo incidents, I generated a heatmap of Echo incidents in 2019 as well (See Figure \@ref(fig:heatmap-2019)). The areas with red show no noticeable difference compared to 2020, which means that the neighbourhoods were already predisposed to medical emergencies.   
 
 ```{r heatmap-2019, echo=FALSE, fig.cap="Toronto Echo Heatmap (2019)", fig.pos="H", out.width = '50%'}
 show(map2019)
@@ -502,7 +501,7 @@ show(map2019)
 
 # Moving Forward
 The results have demonstrated that there are select neighbourhoods that are just generally higher risk, not to anyone's surprise.
-What this project has shown is where these neighbourhoods are, and that looking at the trend of monthly incidents, with Echo-level incidents mirroring the COVID-19 epidemic curve, that it is likely that those same neighbourhoods are hit harder by the pandemic. It would be interesting for further research to drill down into what makes these regions different, be it income, demographic, or something else. Also The media only targets the hardest hit neighbourhoods, but as the heatmap shows, there is a consistent and significant differece between 1/3 of Toronto and the rest of the area.  
+What this project has shown is where these neighbourhoods are, and that looking at the trend of monthly incidents, with Echo-level incidents mirroring the COVID-19 hospitalization line, that it is likely that those same neighbourhoods are hit harder by the pandemic. It would be interesting for further research to drill down into what makes these regions different, be it income, demographic, or something else. Also The media only targets the hardest hit neighbourhoods, but as the heatmap shows, there is a consistent and significant difference between 1/3 of Toronto and the rest of the area.  
 
 # Limitations
 As mentioned, the data provided isn’t fully reliable. Reported Date of COVID-19 cases is never a true representation of when cases happen, the study’s hopes that the aggregation of cases into months helps mitigate some of the unreliability. The priority number of the pandemic incidents must also be kept in mind to be an high level summarization of a pre-determined coding system that is ultimately arbitrarily determined to cover most scenarios but not all. Moreover, the MDPS system leans towards over-triage, therefore a portion of Echo-level incidents will likely be miscategorized. These biases and limitations must be kept in mind when looking at the results and moving forward. 
