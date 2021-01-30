@@ -2,7 +2,7 @@
 # Purpose: Use opendatatoronto to get COVID-19 data
 # Author: Jeremy Chu
 # Contact: jeremychuj@gmail.com
-# Date: 21 January 2021
+# Date: 30 January 2021
 # Pre-requisites: None
 # TODOs: -
 
