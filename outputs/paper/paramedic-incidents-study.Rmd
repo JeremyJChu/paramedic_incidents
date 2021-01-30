@@ -44,12 +44,15 @@ library(maptools)
 ```
 
 ```{r load_scripts, include=FALSE}
-### Uncomment and run if not reading in data ###
+### Uncomment and run if not reading in data locally ###
 
+### Reading and Cleaning Paramedic Incidents and COVID-19 datasets ###
 #source(here("scripts","00_get-data-paramedic-incidents.R")) # Can be substituted with local files, see chunk read-data
 #source(here("scripts","01_data-cleaning_paramedic-incidents.R")) # Can be substituted with local files, see chunk read-data
 #source(here("scripts","02_get-data-covid.R")) # Can be substituted with local files, see chunk read-data
 #source(here("scripts","03_data-cleaning_covid.R")) # Can be substituted with local files, see chunk read-data
+
+### Reading shapefile from Statistics Canada into Global Environment ###
 #source(here("scripts","04_get-shapefile.R")) # Can be substituted with chunk read-shapefile
 
 ### Script Cleanup ###
@@ -68,9 +71,7 @@ covid_fullmonthCount <- read_csv(here("inputs", "data", "2020_covid-cases-full_c
 ```
 
 ```{r data-cleaning, include=FALSE}
-### Comment and Skip if running scripts ###
-
-# If reading data, need to do some factoring in the Markdown
+#Need to do some factoring in the Markdown
 paramedic20192020_cleaned$Month <- factor(paramedic20192020_cleaned$Month, levels = month.abb) #Turning Months into factors for easier sorting
 paramedic11years_cleaned$Month <- factor(paramedic11years_cleaned$Month, levels = month.abb) #Turning Month to factor for easier sorting
 paramedic11years_cleaned$Year <- as.character(paramedic11years_cleaned$Year) #Turning Year to character for graph manipulation
@@ -150,6 +151,7 @@ The dataset contains 18 fields, for the project the following 3 will be examined
 The point of contention is what determines priority. The priority number is determined by Toronto Paramedic Services based on the Medical Priority Dispatch System (MPDS). The MPDS is a system in which once a caller dials 9-1-1 to report an emergency, the telecommunicator at the Dispatch Centre poses a series of scripted questions and triages the answers into pre-established MPDS codes (See Table \@ref(tab:mdps-tb). Created using knitr::kable and kableExtra [@citeKnitr; @citeKableExtra]). Those codes and then turned into the priority numbers in the dataset [@citeTPSData; @citeTorontoMPDS].
 
 ```{r creation-priority-reference-table}
+### Creating Reference Table for Priority Code, Number, and Definition ###
 reference_table <- paramedic20192020_cleaned %>%
   select(Priority_Number, Priority_Code, Priority_Definition) %>% # Select fields relating to Priority_Number
   unique() # Counting unique elements
@@ -158,6 +160,7 @@ MDPS_table <- reference_table[c(5, 3, 4, 1, 2, 6, 7, 8),] # Reordering table bas
 ```
 
 ```{r mdps-tb, echo=FALSE}
+### Displaying Table ###
 knitr::kable(MDPS_table, 
              col.names = gsub("_", " ", names(MDPS_table)), # Substitute "_" in names with space
              align = "cll", # Align columns into Center-Left-Left
@@ -186,11 +189,12 @@ Statistically, bear in mind that the Reported Date field is subject to human err
 
 Keeping in mind the potential pitfalls of the datasets, let’s explore the data. Using tidyverse [@citeTidy], I first filtered the dataset to show only medical emergencies, and subsequently created a bar chart comparing 2019 to 2020 using ggplot2 [@citeGgplot2] (See Figure \@ref(fig:medical-bar)). Between 2020 and 2019, surprisingly 2019 actually had more total emergency calls and dispatches than 2020. 
 ```{r figure-1-medical-bar, input=FALSE}
-## Figure 1a Medical Bar ##
-
+### Figure 1a Medical Bar ###
+#### Data Transformation ####
 paramedic20192020_cleaned$Year <- as.character(paramedic20192020_cleaned$Year) # Turning Year from numeric to character so fill works
 
-medical_bar <- #Plotting Bar Chart 
+#### Plotting the Bar Chart ####
+medical_bar <- 
   paramedic20192020_cleaned %>%
   filter(Incident_Type == "Medical") %>%
   ggplot(mapping = aes(x = Priority_Code, fill = Year)) + # Fill bar colors based on Year
@@ -276,7 +280,7 @@ The question remains as to whether the 2020 Echo incident trend is special or no
 I took all the sheets (2010-2020) from the paramedic incidents dataset, cleaned, merged, and filtered them all using tidyverse [@citeTidy], and plotted with ggplot2 [@citeGgplot2], with the gghighlight package responsible for the highlighting of 2020 [@citeGghighlight] (See Figure \@ref(fig:echo-11)). 
 
 ```{r echo-11-tb, include=FALSE}
-#Creating Echo 11 Years Table 
+#Creating Echo Table for the past 11 years
 echo_11yr_count <-
   paramedic11years_cleaned %>%
   filter(Incident_Type == "Medical" & Priority_Code == "Echo") %>% # Filter by relevant fields
@@ -404,7 +408,6 @@ paramedic2019_map_allmonths <- paramedic20192020_cleaned %>% # Creating a table 
   rename(fsa = Forward_Sortation_Area) %>% # rename Forward_Sortation_Area to fsa to join later
   rename(echo2019cases = n) #rename n into something more understandable
   
-
 plot.data_para_2019 <- left_join(data, paramedic2019_map_allmonths) # Merge the location data with paramedic data, joining under the "fsa" column. left_join is used because merge causes polygon tearing.
 
 ## Plotting the Maps ##
@@ -441,7 +444,6 @@ paramedic_map <- ggplot(plot.data_para_allmonths, aes(x = long, y = lat, group =
        caption ="Source: Open Data Toronto")  
 
 # Paramedic Map (2019)
-
 map2019 <- ggplot(plot.data_para_2019, aes(x = long, y = lat, group = group, fill = echo2019cases)) +
   geom_polygon() +
   coord_equal() +
@@ -464,11 +466,14 @@ grid.arrange(paramedic_map, covid_map, ncol = 2)
 First thing to note is that once again the scale is different, there are vastly more Echo incidents than COVID cases that resulted in hospitalizations in 2020. Scale aside, the red portions of the map eerily overlap. On the top-left of Toronto, upper Etobicoke - the Etobicoke General Hospital and Jane and Finch areas show the highest number of COVID hospitalizations; similarly the two areas are ranked 4th and 9th highest for Echo incidents in 2020 (See Tables \@ref(tab:covid-map-results-table), \@ref(tab:echo-map-results-table)). The question for future research becomes what makes three fifths of the top Echo-incident neighbourhoods also be at a higher risk from COVID-19 emergencies and what makes others not? 
 
 ```{r covid-map-results-table, results = "asis", fig.pos="H", out.width = '70%'}
+# Creating Top 10 Covid Table
 top10_covid <- head(covid_hospitalized_allmonths[order(-covid_hospitalized_allmonths$covidcases),],10) %>% # order with - makes it decreasing; specifying head(10) to show top 10
   na.omit() # removes NAs in results
 
+# Adding colour so that FSAs in the top 10 Echo Table are highlighted here
 top10_covid$fsa = cell_spec(top10_covid$fsa, background = ifelse(top10_covid$fsa %in% c("M5A","M6K","M4Y","M9V","M1K","M5V","M1E","M3N","M4C","M5B"), "blue", "white"), color = ifelse(top10_covid$fsa %in% c("M5A","M6K","M4Y","M9V","M1K","M5V","M1E","M3N","M4C","M5B"), "white", "black")) # Ifelse cell contains these postal codes, which are the top 10 echo incidents, then color and background change
 
+# Displaying table with Kable
 knitr::kable(top10_covid, escape = F,
       col.names = c("Forward Sortation Area","COVID Hospitalizations"),
       align = "cc",
@@ -480,10 +485,13 @@ knitr::kable(top10_covid, escape = F,
 
 
 ```{r echo-map-results-table, results = "asis", fig.pos="H", out.width = '70%'}
+# Creating top 10 Echo Table
 top10_echo <- head(paramedic2020_map_allmonths[order(-paramedic2020_map_allmonths$echo2020cases),],10) # order with - makes it decreasing; specifying head(10) to show top 10
 
+# Adding colour so that FSAs in the top 10 COVID Table are highlighted here
 top10_echo$fsa = cell_spec(top10_echo$fsa, background = ifelse(top10_echo$fsa %in% c("M9V", "M3N", "M1P", "M1B", "M6M", "M6K", "M9N", "M1W", "M3J", "M5A"), "red", "white"), color = ifelse(top10_echo$fsa %in% c("M9V", "M3N", "M1P", "M1B", "M6M", "M6K", "M9N", "M1W", "M3J", "M5A"), "white", "black")) # Ifelse cell contains these postal codes, which are the top 10 COVID cases, then color and background change
 
+# Displaying table with Kable
   kable(top10_echo, escape = F,
       col.names = c("Forward Sortation Area","Echo Incidents"),
       align = "cc",
