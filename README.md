@@ -22,6 +22,7 @@ This project was done entirely with R through R Studio. Results were knitted int
 - bookdown
 - grid
 - rgdal
+- rgeos
 - maptools
 ## Setup
 R Markdown was setup using the following settings:
@@ -33,12 +34,20 @@ header-includes:
   \usepackage{colortbl} 
   \arrayrulecolor{white}
 ```
+If you're running into issues knitting, please refer to script [07_extra_tinytex-troubleshooting.R](https://github.com/JeremyJChu/paramedic_incidents/blob/main/scripts/07_extra_tinytex-troubleshooting.R).
 ## How to Use 
 The project is entirely reproducible. All data downloading, cleaning, and transformation are performed and segmented in the [scripts](scripts) folder. The [R Markdown](outputs/paper) sources all the scripts using the library `here`, so simply clone the repo and everything will run accordingly.
 
 I have also taken the liberty in saving all the raw and cleaned datasets and stored them [here](inputs/data). The R Markdown contains the both options of either running the scripts or reading in the data from inputs, simply comment/uncomment the parts you would like to run. Clone the repo and everything will be there. 
 
 ## Changelog
+2021-01-30
+- Tested reproducibility with Windows machine
+- Added troubleshooting script for knitting
+- Added rgeos and gpclib in case running into issues on heatmaps
+- Edited paper for grammar and clarity
+- Updated scripts 05 and 06 to reflect new changes
+
 2021-01-27
 - Changed paper terminology and graph titles for better clarity
 
