@@ -46,7 +46,7 @@ I have also taken the liberty in saving all the raw and cleaned datasets and sto
 - Added troubleshooting script for knitting
 - Added rgeos and gpclib in case running into issues on heatmaps
 - Edited paper for grammar and clarity
-- Updated scrips 05 and 06 to reflect new changes
+- Updated scripts 05 and 06 to reflect new changes
 
 2021-01-27
 - Changed paper terminology and graph titles for better clarity
