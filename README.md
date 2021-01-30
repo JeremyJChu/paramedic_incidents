@@ -42,7 +42,7 @@ I have also taken the liberty in saving all the raw and cleaned datasets and sto
 
 ## Changelog
 2021-01-30
-- Tested reproducibility with Windows machine. 
+- Tested reproducibility with Windows machine
 - Added troubleshooting script for knitting
 - Added rgeos and gpclib in case running into issues on heatmaps
 - Edited paper for grammar and clarity
