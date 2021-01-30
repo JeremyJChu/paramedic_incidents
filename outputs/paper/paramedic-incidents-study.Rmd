@@ -1,7 +1,7 @@
 ---
 title: "Paramedic Life Threatening Medical Emergencies Mirror COVID-19 Hospitalization Trends in 2020: Exposing the Toronto Neighbourhood Gap"
 author: "Jeremy Chu"
-date: "25/01/2021"
+date: "30/01/2021"
 classoption: table
 output: bookdown::pdf_document2
 header-includes: 
@@ -28,6 +28,8 @@ knitr::opts_chunk$set(echo = FALSE,
 #install.packages("gghighlight")
 #install.packages("kableExtra")
 #install.packages("grid)
+#install.packages("gpclib", type="source")
+#install.packages("rgeos")
 library(tidyverse)
 library(here)
 library(knitr)
@@ -40,7 +42,9 @@ library(kableExtra)
 library(bookdown)
 library(grid)
 library(rgdal)
+library(rgeos)
 library(maptools)
+gpclibPermit() # Requires the gpclib package above, and running rgeos library before maptools, then finally having this line to resolve possible permit issues when fortifying shapefile. The inital error was found on Windows, could not replicate on a MacBook Pro
 ```
 
 ```{r load_scripts, include=FALSE}
@@ -101,7 +105,7 @@ The issue regarding these results is that they require diving into a degree gran
 
 # Methods 
 
-All of the analysis was done using R [@citeR]. Datasets were downloaded using the Toronto Open Data Package [@citeODT], reproducible file paths utilized the here package [@citeHere], and data cleaning/transformation was done with tidyverse [@citeTidy]. The shapefile was read and manipulated using rgdal and maptools [@citeRgdal;@citeMaptools]. All graphs were plot and arranged using a combination of ggplot2, gridExtra, and gghighlight [@citeGgplot2; @citeGridExtra; @citeGghighlight]. Tables were created using knitr::kable [@citeKnitr] and kableExtra [@citeKableExtra]. The creation of the final product was aided with ggpubr, knitr, bookdown and magick [@citeGgpubr; @citeKnitr; @citeBookdown; @citeMagick].
+All of the analysis was done using R [@citeR]. Datasets were downloaded using the Toronto Open Data Package [@citeODT], reproducible file paths utilized the here package [@citeHere], and data cleaning/transformation was done with tidyverse [@citeTidy]. The shapefile was read and manipulated using rgdal and maptools [@citeRgdal;@citeMaptools], and errors were resolved using rgeos and gpclib [@citeRgeos; @citeGpclib]. All graphs were plot and arranged using a combination of ggplot2, gridExtra, and gghighlight [@citeGgplot2; @citeGridExtra; @citeGghighlight]. Tables were created using knitr::kable [@citeKnitr] and kableExtra [@citeKableExtra]. The creation of the final product was aided with ggpubr, knitr, bookdown and magick [@citeGgpubr; @citeKnitr; @citeBookdown; @citeMagick].
 
 # Data
 

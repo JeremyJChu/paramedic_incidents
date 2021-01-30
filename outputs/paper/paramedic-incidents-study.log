@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.27)  30 JAN 2021 13:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.27)  30 JAN 2021 14:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -388,117 +388,33 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box56
 \@float@everytoks=\toks29
 \@floatcapt=\box57
-) (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
-Package: multirow 2021/01/02 v2.6 Span multiple rows of a table
-\multirow@colwidth=\skip60
-\multirow@cntb=\count288
-\multirow@dima=\skip61
-\bigstrutjot=\dimen179
-) (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen180
-\WF@size=\dimen181
-\c@WF@wrappedlines=\count289
-\WF@box=\box58
-\WF@everypar=\toks30
-Package: wrapfig 2003/01/31  v 3.6
-)
-(/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.sty
-Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
-(/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
-Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
-)
-Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
-) (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/tabu/tabu.sty
-Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
-(/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.sty
-Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box59
-\sift@deathcycles=\count290
-\@vwid@loff=\dimen182
-\@vwid@roff=\dimen183
-)
-\c@taburow=\count291
-\tabu@nbcols=\count292
-\tabu@cnt=\count293
-\tabu@Xcol=\count294
-\tabu@alloc=\count295
-\tabu@nested=\count296
-\tabu@target=\dimen184
-\tabu@spreadtarget=\dimen185
-\tabu@naturalX=\dimen186
-\tabucolX=\dimen187
-\tabu@Xsum=\dimen188
-\extrarowdepth=\dimen189
-\abovetabulinesep=\dimen190
-\belowtabulinesep=\dimen191
-\tabustrutrule=\dimen192
-\tabu@thebody=\toks31
-\tabu@footnotes=\toks32
-\tabu@box=\box60
-\tabu@arstrutbox=\box61
-\tabu@hleads=\box62
-\tabu@vleads=\box63
-\tabu@cellskip=\skip62
-)
-(/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/threeparttable/threepar
-ttable.sty
-Package: threeparttable 2003/06/13  v 3.0
-\@tempboxb=\box64
-)
-(/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/threeparttablex/threepa
-rttablex.sty
-Package: threeparttablex 2013/07/23 v0.3 by daleif
-(/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/environ/environ.sty
-Package: environ 2014/05/04 v0.3 A new way to define environments
-
-(/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.s
-ty
-Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
-))
-\TPTL@width=\skip63
-) (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
-\UL@box=\box65
-\UL@hyphenbox=\box66
-\UL@skip=\skip64
-\UL@hook=\toks33
-\UL@height=\dimen193
-\UL@pe=\count297
-\UL@pixel=\dimen194
-\ULC@box=\box67
-Package: ulem 2019/11/18
-\ULdepth=\dimen195
-) (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/makecell/makecell.sty
-Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen196
-\c@nlinenum=\count298
-\TeXr@lab=\toks34
 )
 (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2021-01-09 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count299
-\l__pdf_internal_box=\box68
+\l__kernel_color_stack_int=\count288
+\l__pdf_internal_box=\box58
 ) (./paramedic-incidents-study.aux)
 \openout1 = `paramedic-incidents-study.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
 
 (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-b
 ase.sty
@@ -511,7 +427,7 @@ s.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 93.
+Package hyperref Info: Link coloring OFF on input line 79.
 (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -521,11 +437,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 lestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count300
+\c@section@level=\count289
 )
-LaTeX Info: Redefining \ref on input line 93.
-LaTeX Info: Redefining \pageref on input line 93.
-LaTeX Info: Redefining \nameref on input line 93.
+LaTeX Info: Redefining \ref on input line 79.
+LaTeX Info: Redefining \pageref on input line 79.
+LaTeX Info: Redefining \nameref on input line 79.
 (./paramedic-incidents-study.out) (./paramedic-incidents-study.out)
 \@outlinefile=\write3
 \openout3 = `paramedic-incidents-study.out'.
@@ -564,38 +480,38 @@ LaTeX Info: Redefining \nameref on input line 93.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 9
-5.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 8
+1.
 (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 9
-5.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 8
+1.
 (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-95.
+81.
 (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-95.
+81.
 (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 95.
+(Font)              <12> on input line 81.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 95.
+(Font)              <8> on input line 81.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 95.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 95.
+(Font)              <6> on input line 81.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 81.
 
 (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 95.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 81.
 
 (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -610,16 +526,16 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 \openout4 = `paramedic-incidents-study.toc'.
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 110.
+(Font)              <9> on input line 96.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 110.
+(Font)              <5> on input line 96.
 [2] [3]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-63.
+49.
 (/Users/jeremyjchu/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Overfull \hbox (11.14227pt too wide) in paragraph at lines 179--200
+Overfull \hbox (11.14227pt too wide) in paragraph at lines 165--186
  [][] 
  []
 
@@ -627,7 +543,7 @@ Overfull \hbox (11.14227pt too wide) in paragraph at lines 179--200
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.207 
+l.193 
       ]
 <paramedic-incidents-study_files/figure-latex/medical-bar-1.pdf, id=128, 443.65
 75pt x 316.18124pt>
@@ -635,7 +551,7 @@ File: paramedic-incidents-study_files/figure-latex/medical-bar-1.pdf Graphic fi
 le (type pdf)
 <use paramedic-incidents-study_files/figure-latex/medical-bar-1.pdf>
 Package pdftex.def Info: paramedic-incidents-study_files/figure-latex/medical-b
-ar-1.pdf  used on input line 227.
+ar-1.pdf  used on input line 213.
 (pdftex.def)             Requested size: 328.82266pt x 234.34193pt.
 [5]
 <paramedic-incidents-study_files/figure-latex/echo-line-1.pdf, id=139, 459.7175
@@ -644,18 +560,18 @@ File: paramedic-incidents-study_files/figure-latex/echo-line-1.pdf Graphic file
  (type pdf)
 <use paramedic-incidents-study_files/figure-latex/echo-line-1.pdf>
 Package pdftex.def Info: paramedic-incidents-study_files/figure-latex/echo-line
--1.pdf  used on input line 238.
+-1.pdf  used on input line 224.
 (pdftex.def)             Requested size: 328.84282pt x 226.16919pt.
 [6pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.246 
+l.232 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.246 
+l.232 
        <./paramedic-incidents-study_files/figure-latex/medical-bar-1.pdf> <./pa
 ramedic-incidents-study_files/figure-latex/echo-line-1.pdf>]
 </Users/jeremyjchu/Documents/iSchool/R/Projects/paramedic_incidents/outputs/pap
@@ -666,7 +582,7 @@ s/paper/images/02_ministry-of-health_graph.png Graphic file (type png)
 /paper/images/02_ministry-of-health_graph.png>
 Package pdftex.def Info: /Users/jeremyjchu/Documents/iSchool/R/Projects/paramed
 ic_incidents/outputs/paper/images/02_ministry-of-health_graph.png  used on inpu
-t line 254.
+t line 240.
 (pdftex.def)             Requested size: 281.84787pt x 168.59975pt.
 <paramedic-incidents-study_files/figure-latex/echo-11-1.pdf, id=166, 459.7175pt
  x 316.18124pt>
@@ -674,13 +590,13 @@ File: paramedic-incidents-study_files/figure-latex/echo-11-1.pdf Graphic file (
 type pdf)
 <use paramedic-incidents-study_files/figure-latex/echo-11-1.pdf>
 Package pdftex.def Info: paramedic-incidents-study_files/figure-latex/echo-11-1
-.pdf  used on input line 272.
+.pdf  used on input line 258.
 (pdftex.def)             Requested size: 328.84282pt x 226.16919pt.
 [7pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.278 
+l.264 
        </Users/jeremyjchu/Documents/iSchool/R/Projects/paramedic_incidents/outp
 uts/paper/images/02_ministry-of-health_graph.png>]
 <paramedic-incidents-study_files/figure-latex/echo-v-covid2-1.pdf, id=178, 463.
@@ -689,18 +605,18 @@ File: paramedic-incidents-study_files/figure-latex/echo-v-covid2-1.pdf Graphic
 file (type pdf)
 <use paramedic-incidents-study_files/figure-latex/echo-v-covid2-1.pdf>
 Package pdftex.def Info: paramedic-incidents-study_files/figure-latex/echo-v-co
-vid2-1.pdf  used on input line 283.
+vid2-1.pdf  used on input line 269.
 (pdftex.def)             Requested size: 328.83488pt x 224.2056pt.
 [8pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.291 
+l.277 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.291 
+l.277 
        <./paramedic-incidents-study_files/figure-latex/echo-11-1.pdf> <./parame
 dic-incidents-study_files/figure-latex/echo-v-covid2-1.pdf>]
 <paramedic-incidents-study_files/figure-latex/heatmap-compare-1.pdf, id=205, 45
@@ -709,7 +625,7 @@ File: paramedic-incidents-study_files/figure-latex/heatmap-compare-1.pdf Graphi
 c file (type pdf)
 <use paramedic-incidents-study_files/figure-latex/heatmap-compare-1.pdf>
 Package pdftex.def Info: paramedic-incidents-study_files/figure-latex/heatmap-c
-ompare-1.pdf  used on input line 299.
+ompare-1.pdf  used on input line 285.
 (pdftex.def)             Requested size: 450.69638pt x 173.65361pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -723,13 +639,13 @@ File: paramedic-incidents-study_files/figure-latex/heatmap-2019-1.pdf Graphic f
 ile (type pdf)
 <use paramedic-incidents-study_files/figure-latex/heatmap-2019-1.pdf>
 Package pdftex.def Info: paramedic-incidents-study_files/figure-latex/heatmap-2
-019-1.pdf  used on input line 375.
+019-1.pdf  used on input line 361.
 (pdftex.def)             Requested size: 234.88214pt x 202.15266pt.
 [9pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.381 
+l.367 
        <./paramedic-incidents-study_files/figure-latex/heatmap-compare-1.pdf>]
 Overfull \vbox (1.94614pt too high) has occurred while \output is active []
 
@@ -737,42 +653,42 @@ Overfull \vbox (1.94614pt too high) has occurred while \output is active []
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.381 
+l.367 
       pdfTeX warning (ext4): destination with the same identifier (name{table.3
 }) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.381 
+l.367 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.381 
+l.367 
        <./paramedic-incidents-study_files/figure-latex/heatmap-2019-1.pdf>] [11
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 431--433
+Underfull \hbox (badness 10000) in paragraph at lines 423--425
 []$\T1/lmr/m/n/10.95 https : / / www . toronto . ca / home / covid -[] 19 / cov
 id -[] 19 -[] latest -[] city -[] of -[] toronto -[] news / covid -[] 19 -[] st
 atus -[] of -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 437--439
+Underfull \hbox (badness 10000) in paragraph at lines 429--431
 \T1/lmr/m/n/10.95 / / ckan0 . cf . opendata . inter . prod -[] toronto . ca / d
 ataset / c21f3bd1 -[] e016 -[] 4469 -[] abf5 -[] c58bb8e8b5ce /
  []
 
-[12] (./paramedic-incidents-study.aux)
+[12] [13] (./paramedic-incidents-study.aux)
 Package rerunfilecheck Info: File `paramedic-incidents-study.out' has not chang
 ed.
 (rerunfilecheck)             Checksum: 698BFC35A6E9D3A6190CB0CCFFEA6DE8;2579.
  ) 
 Here is how much of TeX's memory you used:
- 12530 strings out of 481252
- 183063 string characters out of 5914560
- 490964 words of memory out of 5000000
- 29117 multiletter control sequences out of 15000+600000
- 468660 words of font info for 74 fonts, out of 8000000 for 9000
+ 11301 strings out of 481252
+ 164909 string characters out of 5914560
+ 466918 words of memory out of 5000000
+ 27933 multiletter control sequences out of 15000+600000
+ 468554 words of font info for 73 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  71i,13n,74p,1161b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/jeremyjchu/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</
@@ -786,10 +702,10 @@ rs/jeremyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users
 eremyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></Users/jer
 emyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/jer
 emyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on paramedic-incidents-study.pdf (12 pages, 838256 bytes).
+Output written on paramedic-incidents-study.pdf (13 pages, 839316 bytes).
 PDF statistics:
- 379 PDF objects out of 1000 (max. 8388607)
- 328 compressed objects within 4 object streams
- 93 named destinations out of 1000 (max. 500000)
+ 389 PDF objects out of 1000 (max. 8388607)
+ 337 compressed objects within 4 object streams
+ 96 named destinations out of 1000 (max. 500000)
  148 words of extra memory for PDF output out of 10000 (max. 10000000)
 
