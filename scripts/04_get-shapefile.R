@@ -2,7 +2,7 @@
 # Purpose: Read in Shapefile from Statistics Canada for Analysis
 # Author: Jeremy Chu
 # Contact: jeremychuj@gmail.com
-# Date: 23 January 2021
+# Date: 30 January 2021
 # Pre-requisites: Run 00-03 R scripts. Have covid_hospitalized & paramedic20192020_cleaned data in Global Environment.
 #                 Note that the shapefile can be downloaded from Statistics Canada: https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm
 #                   Choose Forward Sortation Areas, check English, and download and unzip to your directory of choice.
