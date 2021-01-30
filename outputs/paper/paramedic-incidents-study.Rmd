@@ -96,11 +96,11 @@ The deadliness of COVID-19 has been swamped with misinformation and confusion. T
 
 The results were telling. While it was surprising that 2020 actually reported less overall medical emergencies (of all severity) than 2019, once the data was filtered down to the Echo-level (life-threatening respiratory or cardiac) emergencies in 2020, and then compared to the COVID-19 hospitalization line, it is apparent that both trends mimic each other, and COVID-19's overall epidemic curve in general: **Rise to a peak in April, stabilize during the Summer, and then spiking in October before remaining high in the Winter.** A cross-reference with news articles and data from the Ontario Ministry of Health adds further support. When both paramedic and COVID data was geomapped onto Statistics Canada’s 2016 Census Boundary Forward Sortation Area file, the results showed significant overlap in neighbourhoods both having issues with higher numbers of Echo-level incidents and COVID-19 hospitalizations.
 
-The issue regarding these results is that they require diving into a degree granularity before the serious impacts of COVID-19 can be gleaned. For most people, as the heatmap will show, will see the data being influenced by the large portions of “low-risk” neighbourhoods. Indeed, for most neighbourhoods, the lockdown has indeed led to 2020 having less overall medical emergencies compared to 2019. However, for select neighbourhoods, the data shows a completely different story, and opens up opportunities for policy makers to dive in. The project can be accessed on Github.^[GitHub repository for study: https://github.com/JeremyJChu/paramedic_incidents]
+The issue regarding these results is that they require diving into a degree granularity before the serious impacts of COVID-19 can be gleaned. As the heatmaps will show, there are significant large portions of “low-risk” neighbourhoods that skew the overall picture. Indeed, for most neighbourhoods, the lockdown has indeed led to 2020 having less overall medical emergencies compared to 2019. However, for select neighbourhoods, the data shows a completely different story, and opens up opportunities for policy makers to dive in. The project can be accessed on Github.^[GitHub repository for study: https://github.com/JeremyJChu/paramedic_incidents]
 
 # Methods 
 
-All of the analysis was done using R [@citeR]. Datasets were downloaded using the Toronto Open Data Package [@citeODT], reproducible file paths utilized the here pacakge [@citeHere], and data cleaning/transformation was done with tidyverse [@citeTidy]. The shapefile was read and manipulated using rgdal and maptools [@citeRgdal;@citeMaptools]. All graphs were plot and arranged using a combination of ggplot2, gridExtra, and gghighlight [@citeGgplot2; @citeGridExtra; @citeGghighlight]. Tables were created using knitr::kable [@citeKnitr] and kableExtra [@citeKableExtra]. The creation of the final product was aided with ggpubr, knitr, bookdown and magick [@citeGgpubr; @citeKnitr; @citeBookdown; @citeMagick].
+All of the analysis was done using R [@citeR]. Datasets were downloaded using the Toronto Open Data Package [@citeODT], reproducible file paths utilized the here package [@citeHere], and data cleaning/transformation was done with tidyverse [@citeTidy]. The shapefile was read and manipulated using rgdal and maptools [@citeRgdal;@citeMaptools]. All graphs were plot and arranged using a combination of ggplot2, gridExtra, and gghighlight [@citeGgplot2; @citeGridExtra; @citeGghighlight]. Tables were created using knitr::kable [@citeKnitr] and kableExtra [@citeKableExtra]. The creation of the final product was aided with ggpubr, knitr, bookdown and magick [@citeGgpubr; @citeKnitr; @citeBookdown; @citeMagick].
 
 # Data
 
@@ -147,7 +147,7 @@ The dataset contains 18 fields, for the project the following 3 will be examined
 ## Understanding and Acknowledging Bias
 ### Paramedic Services Incident Data 2010-2020  
 
-The point of contention of course, is what determines priority. The priority number is determined by Toronto Paramedic Services based on the Medical Priority Dispatch System (MPDS). The MPDS is a system in which once a caller dials 9-1-1 to report an emergency, the telecommunicator at the Dispatch Centre poses a series of scripted questions and triages the answers into pre-established MPDS codes (See Table \@ref(tab:mdps-tb). Created using knitr::kable and kableExtra [@citeKnitr; @citeKableExtra]). Those codes and then turned into the priority numbers in the dataset [@citeTPSData; @citeTorontoMPDS].
+The point of contention is what determines priority. The priority number is determined by Toronto Paramedic Services based on the Medical Priority Dispatch System (MPDS). The MPDS is a system in which once a caller dials 9-1-1 to report an emergency, the telecommunicator at the Dispatch Centre poses a series of scripted questions and triages the answers into pre-established MPDS codes (See Table \@ref(tab:mdps-tb). Created using knitr::kable and kableExtra [@citeKnitr; @citeKableExtra]). Those codes and then turned into the priority numbers in the dataset [@citeTPSData; @citeTorontoMPDS].
 
 ```{r creation-priority-reference-table}
 reference_table <- paramedic20192020_cleaned %>%
@@ -170,7 +170,7 @@ Despite the efficiency and effectiveness of this system in standardizing respons
 
 **Accuracy of MDPS**  
 
-According to @citeAccuracyMDPS, the current state of MDPS lacks both a consensus on "common standards for reporting" and subsequently any measure of accuracy for the MDPS reporting system. In other words, @citeAccuracyMDPS have found evidence of over-triage and under-traige of incidents. That is, excessive or insufficient responses for the incident at hand. Of course, this is not a critique of the medical system. The MDPS leans toward over-triage and with good reason, it is afterall better safe than sorry. However, evidence of under-traige is problematic, and even more troublesome is the complete lack of accuracy evaluation. This makes it hard to look at the data figure out which cases were over, under, and accurate triages.  
+According to @citeAccuracyMDPS, the current state of MDPS lacks both a consensus on "common standards for reporting" and subsequently any measure of accuracy for the MDPS reporting system. In other words, @citeAccuracyMDPS have found evidence of over-triage and under-traige of incidents. That is, excessive or insufficient responses for the incident at hand. Of course, this is not a critique of the medical system. The MDPS leans toward over-triage and with good reason, it is afterall better safe than sorry. However, evidence of under-triage is problematic, and even more troublesome is the complete lack of accuracy evaluation. This makes it difficult to determine which cases were over, under, and accurate triage from just the data.  
 
 **Codification of Emergencies**  
 
@@ -268,7 +268,7 @@ Taking a look at the COVID-19 epidemic curve from the [Ministry of Health](https
 #This is a local file because LaTeX does not support external files. The file is accessible through the GitHub repo, otherwise the source of the image is hyperlinked above.
 knitr::include_graphics(here("outputs/paper/images/02_ministry-of-health_graph.png"))
 ```
-CP24 [@citeCP24April] reported 550 (51.8% GTA) new cases in early April, with cases fluctuating until the Summer months and first lockdown reigned cases in, showing continuous weeks of low cases [@citeCTVSummer]. What differs is that although cases only started rising in October and persisted into the Winter, Echo incidents showed an interesting increase in August. However, Echo incidents likewise saw a sharp spike to beyond April levels in October and remained high till the end of 2020. 
+CP24 [@citeCP24April] reported 550 (51.8% GTA) new COVID cases in early April, with cases fluctuating until the Summer months when the first lockdown reigned cases in, showing continuous weeks of low cases [@citeCTVSummer]. What differs is that although cases only started rising in October and persisted into the Winter, Echo incidents showed an interesting increase in August. However, Echo incidents likewise saw a sharp spike to beyond April levels in October and remained high till the end of 2020. 
 
 The question remains as to whether the 2020 Echo incident trend is special or not. Could other years report similar increase in incidents during Winter because of the cold weather? In addtion, as we are looking at paramedic data, it is also important to know whether COVID-19 hospitalizations follow a similar trend. 
 
@@ -309,7 +309,7 @@ echo_11yr_line_graph  <-
 show(echo_11yr_line_graph) 
 # knitr::include_graphics(here("outputs/paper/images/03_echo-11yr-line_graph.png")) Option for local files. 
 ```
-Comparing data across 11 years, the answer seems to be no, 2020 is indeed special. Not only do cases trend generally higher than other years, the April and October peaks are the highest in 11 years. Moreover, the 2020 trend does not bear any similarities to other years, with some years dipping in incidents during the Winter instead. When we compare the trends between Echo incidents and COVID hospitalizations, unsurprisingly the line follows the overall COVID epidemic curve as well (See Figure \@ref(fig:echo-v-covid2)) (Plotted with ggplot [@citeGgplot2] and grid.Arrange [@citeGridExtra]). This means that we are seeing increased Echo-incidents and COVID hospitalizations in the same month, opening up further opportunities for research.
+Comparing data across 11 years, the answer seems to be yes, 2020 is indeed special. Not only do cases trend generally higher than other years, the April and October peaks are the highest in 11 years. Moreover, the 2020 trend does not bear any similarities to other years, with some years dipping in incidents during the Winter instead. When we compare the trends between Echo incidents and COVID hospitalizations, unsurprisingly the line follows the overall COVID epidemic curve as well (See Figure \@ref(fig:echo-v-covid2)) (Plotted with ggplot [@citeGgplot2] and grid.Arrange [@citeGridExtra]). This means that we are seeing increased Echo-incidents and COVID hospitalizations in the same month, opening up further opportunities for research.
 
 ```{r echo-v-covid-tb, include=FALSE}
 #Preparing the Data
@@ -493,15 +493,15 @@ top10_echo$fsa = cell_spec(top10_echo$fsa, background = ifelse(top10_echo$fsa %i
   add_footnote("Neighbourhoods also in the top 10 COVID table are highlighted in red")
 ```
 
-Lastly, if you were wondering if COVID-19 caused those neighbourhoods to have high Echo incidents, I generated a heatmap of Echo incidents in 2019 as well (See Figure \@ref(fig:heatmap-2019)). The areas with red show no noticeable difference compared to 2020, which means that the neighbourhoods were already predisposed to medical emergencies.   
+Lastly, it is important to consider if COVID-19 caused those neighbourhoods to have high Echo incidents, I generated a heatmap of Echo incidents in 2019 as well (See Figure \@ref(fig:heatmap-2019)). The areas with red show no noticeable difference compared to 2020, which means that the neighbourhoods were already predisposed to medical emergencies.   
 
 ```{r heatmap-2019, echo=FALSE, fig.cap="Toronto Echo Heatmap (2019)", fig.pos="H", out.width = '50%'}
 show(map2019)
 ```
 
 # Moving Forward
-The results have demonstrated that there are select neighbourhoods that are just generally higher risk, not to anyone's surprise.
-What this project has shown is where these neighbourhoods are, and that looking at the trend of monthly incidents, with Echo-level incidents mirroring the COVID-19 hospitalization line, that it is likely that those same neighbourhoods are hit harder by the pandemic. It would be interesting for further research to drill down into what makes these regions different, be it income, demographic, or something else. Also The media only targets the hardest hit neighbourhoods, but as the heatmap shows, there is a consistent and significant difference between 1/3 of Toronto and the rest of the area.  
+The results have demonstrated that there are select neighbourhoods that are just generally higher risk.
+What this project has shown is where these neighbourhoods are, and that looking at the trend of monthly incidents, with Echo-level incidents mirroring the COVID-19 hospitalization line, that it is likely that those same neighbourhoods are hit harder by the pandemic. It would be interesting for further research to drill down into what makes these regions different, be it income, demographic, or something else. As the heatmaps show, there is a consistent and significant difference between 1/3 of Toronto and the rest of the area.  
 
 # Limitations
 As mentioned, the data provided isn’t fully reliable. Reported Date of COVID-19 cases is never a true representation of when cases happen, the study’s hopes that the aggregation of cases into months helps mitigate some of the unreliability. The priority number of the pandemic incidents must also be kept in mind to be an high level summarization of a pre-determined coding system that is ultimately arbitrarily determined to cover most scenarios but not all. Moreover, the MDPS system leans towards over-triage, therefore a portion of Echo-level incidents will likely be miscategorized. These biases and limitations must be kept in mind when looking at the results and moving forward. 
