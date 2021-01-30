@@ -2,7 +2,7 @@
 # Purpose: Add additional columns based on research on the Medical Dispatch Priority System
 # Author: Jeremy Chu
 # Contact: jeremychuj@gmail.com
-# Date: 19 January 2021
+# Date: 30 January 2021
 # Pre-requisites: 00_get-data-paramedic-incidents.R, dataframes paramedic2019 and paramedic2020 loaded in the environment
 # TODOs: Add columns for priority codes, add columns for explanations to priority codes
 
@@ -52,7 +52,7 @@ paramedic11years_cleaned <- rbind(paramedic2010,
 ## Reassigning Priority Codes back to datasets ##
 ### 2010-2020 ###
 paramedic11years_cleaned <- paramedic11years_cleaned %>%
-  mutate(Priority_Code = case_when(
+  mutate(Priority_Code = case_when( # case_when is basically if Priority_Number == X, ~ (then) "Name"
     Priority_Number == 1 ~ "Delta",
     Priority_Number == 3 ~ "Charlie",
     Priority_Number == 4 ~ "Bravo",
