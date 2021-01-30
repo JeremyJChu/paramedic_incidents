@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.27)  30 JAN 2021 14:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.27)  30 JAN 2021 17:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -690,7 +690,7 @@ Here is how much of TeX's memory you used:
  27933 multiletter control sequences out of 15000+600000
  468554 words of font info for 73 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 71i,13n,74p,1161b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,13n,74p,1163b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/jeremyjchu/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</
 Users/jeremyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></
 Users/jeremyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></
@@ -702,7 +702,7 @@ rs/jeremyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users
 eremyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></Users/jer
 emyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/jer
 emyjchu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on paramedic-incidents-study.pdf (13 pages, 839316 bytes).
+Output written on paramedic-incidents-study.pdf (13 pages, 839306 bytes).
 PDF statistics:
  389 PDF objects out of 1000 (max. 8388607)
  337 compressed objects within 4 object streams
