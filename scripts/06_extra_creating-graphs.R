@@ -2,7 +2,7 @@
 # Purpose: OPTIONAL: Creating PNG files of all graphs in R Markdown
 # Author: Jeremy Chu
 # Contact: jeremychuj@gmail.com
-# Date: 22 January 2021
+# Date: 30 January 2021
 # Pre-requisites: Scripts: 00 - 03 already run. 2019-2020_paramedic-incidents_cleaned.csv, 2010-2020_paramedic-incidents_cleaned.csv, and 2020_covid-cases_cleaned.csv loaded into global environment.
 #                 If scripts already run, data should already be loaded. An additional read_csv function will also be available in the code below.                  
 #TODOs: Create Charts and Graphs
@@ -185,7 +185,7 @@ case_number_trend <-
         panel.background = element_blank(),
         plot.title = element_text(size = 10, face = "bold", hjust = 0.5),
         plot.caption = element_text(size = 6)) +
-  labs(title = "2020 COVID Case Trend by Month",
+  labs(title = "2020 COVID Hospitalization Trend by Month",
        caption ="Source: Open Data Toronto")  
 
 
