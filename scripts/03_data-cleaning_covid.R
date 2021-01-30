@@ -2,7 +2,7 @@
 # Purpose: Add additional columns based on research on the Medical Dispatch Priority System
 # Author: Jeremy Chu
 # Contact: jeremychuj@gmail.com
-# Date: 21 January 2021
+# Date: 30 January 2021
 # Pre-requisites: 02_get-data-covid, covid-data dataset in environment
 # TODOs: Clean up and filter covid data
 
