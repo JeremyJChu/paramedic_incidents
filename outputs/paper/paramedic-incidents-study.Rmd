@@ -220,7 +220,7 @@ medical_bar <-
        caption ="Source: Open Data Toronto")
 ```
 
-```{r medical-bar, echo=FALSE, fig.cap = "Medical Bar", fig.pos = "H", out.width = '70%'}
+```{r medical-bar, echo=FALSE, fig.cap = "Bar chart comparing medical incident classification between 2019 and 2020", fig.pos = "H", out.width = '70%'}
 show(medical_bar)
 # knitr::include_graphics(here("outputs/paper/images/04_2019-2020-medical_bar.png")) Option for local files
 # fig.pos = "H" along with the header-includes: \usepackage{float} in started lets you lock images in place so they don't float
