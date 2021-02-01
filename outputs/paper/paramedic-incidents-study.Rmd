@@ -278,7 +278,7 @@ knitr::include_graphics(here("outputs/paper/images/02_ministry-of-health_graph.p
 ```
 CP24 [@citeCP24April] reported 550 (51.8% GTA) new COVID cases in early April, with cases fluctuating until the Summer months when the first lockdown reigned cases in, showing continuous weeks of low cases [@citeCTVSummer]. What differs is that although cases only started rising in October and persisted into the Winter, Echo incidents showed an interesting increase in August. However, Echo incidents likewise saw a sharp spike to beyond April levels in October and remained high till the end of 2020. 
 
-The question remains as to whether the 2020 Echo incident trend is special or not. Could other years report similar increase in incidents during Winter because of the cold weather? In addtion, as we are looking at paramedic data, it is also important to know whether COVID-19 hospitalizations follow a similar trend. 
+The question remains as to whether the 2020 Echo incident trend is special or not. Could other years report similar increase in incidents during Winter because of the cold weather? In addition, as we are looking at paramedic data, it is also important to know whether COVID-19 hospitalizations follow a similar trend. 
 
 ## 2020 is a Special Year After All!
 I took all the sheets (2010-2020) from the paramedic incidents dataset, cleaned, merged, and filtered them all using tidyverse [@citeTidy], and plotted with ggplot2 [@citeGgplot2], with the gghighlight package responsible for the highlighting of 2020 [@citeGghighlight] (See Figure \@ref(fig:echo-11)). 
